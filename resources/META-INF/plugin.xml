@@ -28,11 +28,19 @@
     <!-- Add your extensions here -->
   </extensions>
 
+
+  <application-components>
+    <!-- Add your application components here -->
+    <component>
+      <implementation-class>main.Java.PluginRegistration</implementation-class>
+    </component>
+  </application-components>
+
+
   <actions>
-    <!-- Add your actions here -->
-    <action id="generateSrcFromTest" class="marekbruchaty.UTDDPlugin.GenerateAction" text="GenerateSrcFromTest"
-            description="Generates classes and class methods from defined unit test">
-      <add-to-group group-id="GenerateGroup" anchor="last"/>
+    <action id="TestPairActionID" class="main.Java.TestPairAction" text="TestPair" description="TestPair Generator">
+      <add-to-group group-id="MainToolBar" anchor="first"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="shift meta ctrl alt P"/>
     </action>
   </actions>
 
