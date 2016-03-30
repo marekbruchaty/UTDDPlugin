@@ -1,7 +1,15 @@
 package main.Java.gui;
 
+import com.intellij.openapi.actionSystem.ComputableActionGroup;
+import com.intellij.openapi.application.ApplicationManager;
+import javafx.stage.FileChooser;
+
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
 import java.awt.event.*;
+import java.io.File;
 import java.lang.reflect.ParameterizedType;
 
 public class TestPairDialog extends JDialog {
@@ -12,9 +20,14 @@ public class TestPairDialog extends JDialog {
     private JTextField classPath;
     private JTextField testName;
     private JTextField testPath;
+    private JTabbedPane TestMainClassGenerator;
+    private JButton selectClassButton;
+    private JButton selectTestButton;
+    private JTextPane textPane1;
 
     public TestPairDialog(String[] args) {
         setContentPane(contentPane);
+        setTitle("UTDDPlugin");
         setModal(true);
         setResizable(false);
         getRootPane().setDefaultButton(buttonOK);
@@ -84,6 +97,67 @@ public class TestPairDialog extends JDialog {
                 super.keyTyped(e);
             }
         });
+
+
+        selectClassButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
+                int result = fileChooser.showOpenDialog(fileChooser);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    File selectedFile = fileChooser.getSelectedFile();
+                    System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+                }
+
+
+            }
+        });
+
+
+        selectTestButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                SimpleFileChooser chooser = new SimpleFileChooser("Select bla bla");
+
+
+            }
+        });
+    }
+
+
+    public JTextField getClassName() {
+        return className;
+    }
+
+    public void setClassName(JTextField className) {
+        this.className = className;
+    }
+
+    public JTextField getClassPath() {
+        return classPath;
+    }
+
+    public void setClassPath(JTextField classPath) {
+        this.classPath = classPath;
+    }
+
+    public JTextField getTestName() {
+        return testName;
+    }
+
+    public void setTestName(JTextField testName) {
+        this.testName = testName;
+    }
+
+    public JTextField getTestPath() {
+        return testPath;
+    }
+
+    public void setTestPath(JTextField testPath) {
+        this.testPath = testPath;
     }
 
     private void onOK() {
@@ -96,10 +170,4 @@ public class TestPairDialog extends JDialog {
         dispose();
     }
 
-    public static void main(String[] args) {
-        TestPairDialog dialog = new TestPairDialog(args);
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
-    }
 }

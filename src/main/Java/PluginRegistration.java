@@ -31,6 +31,8 @@ public class PluginRegistration implements ApplicationComponent{
 //        toolBar.addSeparator();
 //        toolBar.add(tpa);
 
+
+
     }
 
     @Override

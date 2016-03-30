@@ -36,11 +36,17 @@
     </component>
   </application-components>
 
-
   <actions>
-    <action id="TestPairActionID" class="main.Java.TestPairAction" text="TestPair" description="TestPair Generator">
-      <add-to-group group-id="MainToolBar" anchor="first"/>
-      <keyboard-shortcut keymap="$default" first-keystroke="shift meta ctrl alt P"/>
+    <action id="TestClassActionID" class="main.Java.TestClassAction" text="Create Test/Main Classes"
+            description="Test class generator">
+      <!--<add-to-group group-id="CodeMenu" anchor="last"/>-->
+      <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="ctrl meta alt c"/>
+    </action>
+    <action id="TestMethodActionID" class="main.Java.TestMethodAction" text="Create Test/Main Methods"
+            description="Test method generator">
+      <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="ctrl meta alt m"/>
     </action>
   </actions>
 
