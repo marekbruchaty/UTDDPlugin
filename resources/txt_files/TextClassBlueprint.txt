@@ -1,0 +1,8 @@
+package [<PACKAGE>];
+
+import static org.junit.Assert.*;
+
+[<FILE_TAMPLATE>]
+
+public class [<CLASS>] {
+}

@@ -27,7 +27,7 @@ public class TestPairDialog extends JDialog {
         setLocation(getCurrentWindowCenter(contentPane));
         //setLocation(MouseInfo.getPointerInfo().getLocation());
         setContentPane(contentPane);
-        setTitle("UTDDPlugin");
+        setTitle("Test/Main Class Generator");
         setModal(true);
         getRootPane().setDefaultButton(buttonGenerate);
 
@@ -49,8 +49,6 @@ public class TestPairDialog extends JDialog {
         if (args.length > 0) classPath.setText(currentPath);
         testName.setText(className.getText() + "Test");
         testPath.setText(classPath.getText() + "Test");
-
-
 
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
