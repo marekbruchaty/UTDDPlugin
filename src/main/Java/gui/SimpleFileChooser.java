@@ -1,7 +1,6 @@
-package main.Java.gui;
+package main.java.gui;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.File;
 
 /**

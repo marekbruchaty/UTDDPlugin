@@ -32,22 +32,22 @@
   <application-components>
     <!-- Add your application components here -->
     <component>
-      <implementation-class>main.Java.PluginRegistration</implementation-class>
+      <implementation-class>main.java.PluginRegistration</implementation-class>
     </component>
   </application-components>
 
   <actions>
-    <action id="TestClassActionID" class="main.Java.TestClassAction" text="Create Test/Main Classes"
+    <action id="TestClassActionID" class="main.java.TestClassAction" text="Create Test/Main Classes"
             description="Test class generator">
       <!--<add-to-group group-id="CodeMenu" anchor="last"/>-->
-      <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+      <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
       <keyboard-shortcut keymap="$default" first-keystroke="ctrl meta alt c"/>
     </action>
-    <action id="TestMethodActionID" class="main.Java.TestMethodAction" text="Create Test/Main Methods"
-            description="Test method generator">
-      <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
-      <keyboard-shortcut keymap="$default" first-keystroke="ctrl meta alt m"/>
-    </action>
+    <!--<action id="TestMethodActionID" class="main.Java.TestMethodAction" text="Create Test/Main Methods"-->
+            <!--description="Test method generator">-->
+      <!--<add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>-->
+      <!--<keyboard-shortcut keymap="$default" first-keystroke="ctrl meta alt m"/>-->
+    <!--</action>-->
   </actions>
 
 </idea-plugin>

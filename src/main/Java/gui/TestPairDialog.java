@@ -1,20 +1,15 @@
-package main.Java.gui;
+package main.java.gui;
 
-import com.intellij.openapi.actionSystem.ComputableActionGroup;
-import com.intellij.openapi.application.ApplicationManager;
-import javafx.stage.FileChooser;
+import main.java.FileOperations;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.filechooser.FileSystemView;
+import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
-import java.lang.reflect.ParameterizedType;
 
 public class TestPairDialog extends JDialog {
     private JPanel contentPane;
-    private JButton buttonOK;
+    private JButton buttonGenerate;
     private JButton buttonCancel;
     private JTextField className;
     private JTextField classPath;
@@ -24,17 +19,23 @@ public class TestPairDialog extends JDialog {
     private JButton selectClassButton;
     private JButton selectTestButton;
     private JTextPane textPane1;
+    private String currentPath;
 
     public TestPairDialog(String[] args) {
+        FileOperations fc = new FileOperations();
+        currentPath = args[0];
+        setLocation(getCurrentWindowCenter(contentPane));
+        //setLocation(MouseInfo.getPointerInfo().getLocation());
         setContentPane(contentPane);
         setTitle("UTDDPlugin");
         setModal(true);
-        setResizable(false);
-        getRootPane().setDefaultButton(buttonOK);
+        getRootPane().setDefaultButton(buttonGenerate);
 
-        buttonOK.addActionListener(new ActionListener() {
+        buttonGenerate.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onOK();
+                fc.createFile(classPath.getText());
+                //onOK();
+
             }
         });
 
@@ -45,7 +46,7 @@ public class TestPairDialog extends JDialog {
         });
 
         className.setText("");
-        if (args.length > 0) classPath.setText(args[0]);
+        if (args.length > 0) classPath.setText(currentPath);
         testName.setText(className.getText() + "Test");
         testPath.setText(classPath.getText() + "Test");
 
@@ -104,7 +105,7 @@ public class TestPairDialog extends JDialog {
             public void actionPerformed(ActionEvent e) {
 
                 JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
+                fileChooser.setCurrentDirectory(new File(currentPath));
                 int result = fileChooser.showOpenDialog(fileChooser);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
@@ -120,8 +121,14 @@ public class TestPairDialog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                SimpleFileChooser chooser = new SimpleFileChooser("Select bla bla");
 
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setCurrentDirectory(new File(currentPath));
+                int result = fileChooser.showOpenDialog(fileChooser);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    File selectedFile = fileChooser.getSelectedFile();
+                    System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+                }
 
             }
         });
@@ -170,4 +177,11 @@ public class TestPairDialog extends JDialog {
         dispose();
     }
 
+    private Point getCurrentWindowCenter(JPanel jPanel) {
+        GraphicsDevice screen = MouseInfo.getPointerInfo().getDevice();
+        Rectangle r = screen.getDefaultConfiguration().getBounds();
+        int x = (r.width / 2 - jPanel.getWidth() / 2) / 2 + r.x;
+        int y = (r.height / 2 - jPanel.getHeight() / 2) / 2 + r.y;
+        return new Point(x, y);
+    }
 }

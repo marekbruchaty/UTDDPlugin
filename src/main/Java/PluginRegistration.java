@@ -1,11 +1,6 @@
-package main.Java;
+package main.java;
 
-import com.intellij.notification.impl.NotificationActionProvider;
-import com.intellij.openapi.actionSystem.ActionManager;
-import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.components.ApplicationComponent;
-import com.intellij.openapi.graph.option.IconOptionItem;
-import com.intellij.openapi.util.IconLoader;
 import org.jetbrains.annotations.NotNull;
 
 /**

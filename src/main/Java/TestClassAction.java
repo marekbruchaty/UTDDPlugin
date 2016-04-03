@@ -1,13 +1,10 @@
-package main.Java;
+package main.java;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.openapi.graph.io.gml.ObjectEncoder;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.Messages;
-import com.intellij.openapi.wm.impl.SystemDock;
-import main.Java.gui.TestPairDialog;
+import main.java.gui.TestPairDialog;
 
 /**
  * Created by Marek Bruchatý on 18/03/16.
@@ -39,7 +36,6 @@ public class TestClassAction extends AnAction {
         if (project == null)
             return;
         Object navigatable = e.getData(CommonDataKeys.NAVIGATABLE);
-        //navigatable = "PsiDirectory:/Users/Marek/Workspace/Java/UTDDPluginTesting/src/main"
         String projectPath = navigatable.toString();
         Boolean isDirectory = projectPath.startsWith("PsiDirectory:");
         e.getPresentation().setEnabledAndVisible(isDirectory);
