@@ -26,51 +26,17 @@ public class Parser {
 
     }
 
-    public String getMethodName(String func) {
-        MethodPrototype mp = null;
-
-        try {
-            mp = new MethodPrototype(func);
-            return mp.name;
-        } catch (Exception e) {
-            print(e);
-            return "";
-        }
-    }
-
-    public String getMethodParameters(String func) {
-        MethodPrototype mp = null;
-
-        try {
-            mp = new MethodPrototype(func);
-        } catch (Exception e) {
-            print(e);
-            System.exit(-1);
-        }
-
-        return mp.parameterList.toString();
-    }
-
-    public String getMethodReturnVal(String func) {
-        MethodPrototype mp = null;
-
-        try {
-            mp = new MethodPrototype(func);
-        } catch (Exception e) {
-            print(e);
-            System.exit(-1);
-        }
-
-        return mp.output;
-    }
-
     public Boolean methodValidator(String str) {
         try {
-            MethodPrototype mp = new MethodPrototype(str);
+            new MethodPrototype(str);
             return true;
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public MethodPrototype parseMethodPrototype(String str) throws Exception {
+        return new MethodPrototype(str);
     }
 
     private void print(Exception e) {

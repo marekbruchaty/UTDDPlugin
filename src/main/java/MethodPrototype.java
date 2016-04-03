@@ -61,7 +61,7 @@ public class MethodPrototype {
     }
 
     private String parseName(String str) throws Exception {
-        if (str.matches("[a-zA-Z][a-zA-Z0-9_-]*")) return str;
+        if (str.matches("\\w+")) return str;
         else throw new Exception("Incorrect method prototype. Badly formated name ["+str+"].");
     }
 
@@ -103,4 +103,23 @@ public class MethodPrototype {
         return sb.toString();
     }
 
+    public String getRaw() {
+        return raw;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getOutput() {
+        return output;
+    }
+
+    public String getSign() {
+        return sign;
+    }
+
+    public ArrayList<String> getParameterList() {
+        return parameterList;
+    }
 }

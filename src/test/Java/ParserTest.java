@@ -1,5 +1,6 @@
 package test.java;
 
+import main.java.MethodPrototype;
 import main.java.Parser;
 import org.junit.After;
 import org.junit.Before;
@@ -118,34 +119,30 @@ public class ParserTest {
         assertTrue(p.methodValidator(input));
     }
 
-//
-//    @Test
-//    public void testMethodName1() throws Exception {
-//        String input = "sampleFunction(123,\"Sample string\") = 456";
-//        String name = "sampleFunction";
-//        assertEquals(name, p.getMethodName(input));
-//    }
-//
-//    @Test
-//    public void testMethodName2() throws Exception {
-//        String input = "_sample_Function(123,\"Sample string\") = 456";
-//        String name = "_sample_Function";
-//        assertEquals(name, p.getMethodName(input));
-//    }
-//
-//    @Test
-//    public void testMethodName3() throws Exception {
-//        String input = "sample-Function(123,\"Sample string\") = 456";
-//        String name = "sample-Function";
-//        assertEquals(name, p.getMethodName(input));
-//    }
-//
-//    @Test
-//    public void testMethodName4() throws Exception {
-//        String input = "sample123Function456(123,\"Sample string\") = 456";
-//        String name = "sample123Function456";
-//        assertEquals(name, p.getMethodName(input));
-//    }
 
+    @Test
+    public void testMethodName1() throws Exception {
+        String input = "sampleFunction(123,\"Sample string\") == 456";
+        String name = "sampleFunction";
+        MethodPrototype mp = p.parseMethodPrototype(input);
+        assertEquals(name, mp.getName());
+    }
+
+    @Test
+    public void testMethodName2() throws Exception {
+        String input = "_sample_Function_(123,\"Sample string\") == 456";
+        String name = "_sample_Function_";
+        MethodPrototype mp = p.parseMethodPrototype(input);
+        assertEquals(name, mp.getName());
+    }
+
+
+    @Test
+    public void testMethodName3() throws Exception {
+        String input = "sample123Function456(123,\"Sample string\") == 456";
+        String name = "sample123Function456";
+        MethodPrototype mp = p.parseMethodPrototype(input);
+        assertEquals(name, mp.getName());
+    }
 
 }
