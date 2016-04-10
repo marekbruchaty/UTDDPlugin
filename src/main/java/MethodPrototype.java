@@ -6,23 +6,27 @@ import java.util.ArrayList;
  * Created by Marek Bruchatý on 02/04/16.
  */
 public class MethodPrototype {
-    String raw = "";
-    String name = "";
-    String output = "void";
-    String sign = "==";
-    ArrayList<String> parameterList = new ArrayList<>();
+    private String raw = "";
+    private String name = "";
+    private String returnType = "void";
+    private String sign = "==";
+    private ArrayList<String> parameterList = new ArrayList<>();
 
     public MethodPrototype(String str) throws Exception {
         this.raw = str;
         processString(str);
 
-        System.out.println(this.toString());
+//        System.out.println(this.toString());
     }
 
     private void processString(String str) throws Exception {
+        str = str.replaceAll("\\s+", " ");
+        if (str.length() == 0 || str.matches(" ")) throw new Exception("No method prototype.");
+        if (str.startsWith(" ")) str = str.substring(1);
+        if (str.endsWith(" ")) str = str.substring(0,str.length()-1);
         validate(str);
 
-        String[] str_split = str.replaceAll("\\s+", "").split("\\(|\\)");
+        String[] str_split = str.split("\\(|\\)");
         if (str_split.length == 1) {
             this.name = parseName(str_split[0]);
         } else if (str_split.length == 2) {
@@ -32,55 +36,72 @@ public class MethodPrototype {
             this.name = parseName(str_split[0]);
             this.parameterList = makeParametersList(str_split[1]);
             this.sign = parseSign(str_split[2]);
-            this.output = parseOutput(str_split[2]);
-        } else throw new Exception("Incorrect method prototype. Wrong format.");
+            this.returnType = returnType(str_split[2]);
+        } else throw new Exception("Wrong use of parenthases.");
     }
 
     private void validate(String str) throws Exception {
-        int count = numOccurrences(str,'(') + numOccurrences(str,')');
-        if (count > 2) throw new Exception("Incorrect method prototype. Wrong number of parenthases [" + count + "].");
+        if (!str.substring(0,1).matches("[a-zA-Z_]+")) throw new Exception("Wrong name format.");
+        int lCount = numOccurrences(str,'(');
+        if (lCount == 0) throw new Exception("No opening parenthesis.");
+        else if (lCount > 1) throw new Exception("Too many opening parentheses.");
+        int rCount = numOccurrences(str,')');
+        if (rCount == 0) throw new Exception("No closing parentheses");
+        else if (rCount > 1) throw new Exception("Too many closing parentheses");
     }
 
     private int numOccurrences(String str, char c) {
         return str.length() - str.replace(String.valueOf(c), "").length();
     }
 
-    private ArrayList<String> makeParametersList(String str) {
+    private ArrayList<String> makeParametersList(String str) throws Exception {
         ArrayList<String> parameters = new ArrayList<>();
 
+        str = str.replaceAll("\\s+", "");
         if (str.length() == 0) return parameters;
 
         String[] par_array = str.split(",");
         for (String s: par_array) {
-            if (s.matches("\".*\"")) parameters.add("String");
-            else if (s.matches("[0-9]+")) parameters.add("int");
-            else if (s.matches("[0-9]+\\.[0-9]*")) parameters.add("float");
-            else parameters.add("null");
+            if (s.isEmpty()) throw new Exception("Empty parameter.");
+            parameters.add(parseType(s));
         }
         return parameters;
     }
 
     private String parseName(String str) throws Exception {
+        if (str.endsWith(" ")) str = str.substring(0,str.length()-1);
         if (str.matches("\\w+")) return str;
-        else throw new Exception("Incorrect method prototype. Badly formated name ["+str+"].");
+        else throw new Exception("Wrong name format ["+str+"].");
     }
 
     private String parseSign(String str) throws Exception {
-        String sign = str.substring(0,2);
+        if (str.length() < 3)
+            throw new Exception("Wrong comparative sign ["+str.replaceAll("\\s+", "")+"].");
+        str = str.replaceAll("\\s+", "");
+        String sign = str.substring(0, 2);
         if (sign.matches("!=") || sign.matches("==")) return sign;
-        throw new Exception("Incorrect method prototype. Bad sign ["+sign+"].");
+        throw new Exception("Wrong comparative sign [" + sign + "].");
     }
 
-    private String parseOutput(String str) throws Exception {
-        if (str.length() < 3)
-            throw new Exception("Incorrect method prototype. Badly formated return value. ["+str+"].");
+    private String returnType(String str) throws Exception {
+        if (str.startsWith(" ")) str = str.substring(1);
+        if (str.length() < 3) throw new Exception("Wrong return value format. ["+str+"].");
+        str = str.substring(2);
+        if (str.startsWith(" ")) str = str.substring(1);
+        if (str.length() == 0) throw new Exception("Wrong return value format. ["+str+"].");
+        String type = parseType(str);
+        if (type.equals("void")) throw new Exception("Wrong return value. ["+str+"].");
+        return type;
+    }
 
-        String out = str.substring(2);
-        if (out.matches("\".*\"")) return "String";
-        else if (out.matches("[0-9]+")) return "int";
-        else if (out.matches("[0-9]+\\.[0-9]*")) return "float";
+    private String parseType(String str) {
+        if (str.matches("\".*\"")) return "String";
+        else if (str.matches("[0-9]+")) return "int";
+        else if (str.matches("[0-9]+\\.[0-9]*")) return "float";
+        else if (str.matches("true") || str.matches("false")) return "boolean";
         else return "void";
     }
+
 
     @Override
     public String toString() {
@@ -98,8 +119,71 @@ public class MethodPrototype {
         }
 
         sb.append("\nMethod sign:\t\t" + this.sign);
-        sb.append("\nMethod output:\t\t" + this.output);
+        sb.append("\nMethod returnType:\t\t" + this.returnType);
 
+        return sb.toString();
+    }
+
+    public String constructMethod() {
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("public ").append(this.getReturnType()).append(" ").append(this.getName()).append("(");
+
+        int[] index = new int[]{1,1,1,1,1};
+        if (this.getParameterList().size() != 0) {
+            for (String s : this.getParameterList()) {
+                sb.append(s).append(" ");
+                switch (s) {
+                    case "String":
+                        sb.append("str").append(index[0]++);
+                        break;
+                    case "int":
+                        sb.append("int").append(index[1]++);
+                        break;
+                    case "float":
+                        sb.append("float").append(index[2]++);
+                        break;
+                    case "boolean":
+                        sb.append("bool").append(index[3]++);
+                        break;
+                    case "void":
+                        sb.append("any").append(index[4]++);
+                        break;
+                }
+                sb.append(", ");
+            }
+            sb.deleteCharAt(sb.length() - 1);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+
+        sb.append(")\n");
+        sb.append("  //TODO - Add method implementation here\n\n");
+        switch (this.getReturnType()) {
+            case "String": sb.append("return \"\";");
+                break;
+            case "int": sb.append("return 0;");
+                break;
+            case "float": sb.append("return 0.0;");
+                break;
+            case "boolean": sb.append("return false;");
+                break;
+            case "void":
+                break;
+        }
+        sb.append("\n}");
+
+        return sb.toString();
+    }
+
+    public String constructTestMethod() {
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("@Test\n");
+        sb.append("public void test").append(this.name).append("() {\n");
+        sb.append("  //TODO - Add test implementation here\n\n");
+        sb.append("  assert();\n");
+        sb.append("}");
         return sb.toString();
     }
 
@@ -111,8 +195,8 @@ public class MethodPrototype {
         return name;
     }
 
-    public String getOutput() {
-        return output;
+    public String getReturnType() {
+        return returnType;
     }
 
     public String getSign() {
@@ -122,4 +206,5 @@ public class MethodPrototype {
     public ArrayList<String> getParameterList() {
         return parameterList;
     }
+
 }

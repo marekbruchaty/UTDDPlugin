@@ -1,6 +1,9 @@
 package main.java;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 
 /**
  * Created by Marek Bruchatý on 31/03/16.

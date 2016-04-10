@@ -1,12 +1,5 @@
 package main.java;
 
-import com.sun.org.apache.bcel.internal.classfile.ExceptionTable;
-import com.sun.org.apache.bcel.internal.classfile.Method;
-import com.sun.org.apache.xerces.internal.impl.dv.xs.BooleanDV;
-import com.sun.org.apache.xml.internal.serializer.utils.SystemIDResolver;
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import com.sun.org.apache.xpath.internal.operations.String.*;
-
 import java.util.IllegalFormatException;
 
 /**
@@ -14,7 +7,7 @@ import java.util.IllegalFormatException;
  */
 public class Parser {
 
-    public String getTestPath(String mainPath) throws IllegalFormatException {
+    public static String getTestPath(String mainPath) throws IllegalFormatException {
 
         if (mainPath.contains("Main")) {
             return mainPath.replaceFirst("(Main)","Test");
@@ -26,7 +19,7 @@ public class Parser {
 
     }
 
-    public Boolean methodValidator(String str) {
+    public static Boolean methodValidator(String str) {
         try {
             new MethodPrototype(str);
             return true;
@@ -35,8 +28,37 @@ public class Parser {
         }
     }
 
-    public MethodPrototype parseMethodPrototype(String str) throws Exception {
+
+    public static MethodPrototype parseMethodPrototype(String str) throws Exception {
         return new MethodPrototype(str);
+    }
+
+    public static String createMethod(MethodPrototype mp) {
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("public ").append(mp.getReturnType()).append(" ").append(mp.getName()).append("(");
+
+        int index = 1;
+        for (String s: mp.getParameterList()) {
+            sb.append(s).append(" par").append(index++).append(", ");
+        }
+        sb.deleteCharAt(sb.length()-1);
+        sb.deleteCharAt(sb.length()-1);
+
+        sb.append(") {");
+        sb.append("\n");
+        sb.append("}");
+
+//        LiveTemplateBuilder ltb = new LiveTemplateBuilder();
+
+
+        return sb.toString();
+    }
+
+    public static String createTestMethod(MethodPrototype mp) {
+
+        return "";
     }
 
     private void print(Exception e) {

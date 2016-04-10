@@ -119,6 +119,29 @@ public class ParserTest {
         assertTrue(p.methodValidator(input));
     }
 
+    @Test
+    public void testMethodValidator12() throws Exception {
+        String input = "some_sample(1,2,3) === 0";
+        assertFalse(p.methodValidator(input));
+    }
+
+    @Test
+    public void testMethodValidator13() throws Exception {
+        String input = "some sample(1) == 0";
+        assertFalse(p.methodValidator(input));
+    }
+
+    @Test
+    public void testMethodValidator14() throws Exception {
+        String input = "some_sample(1,,2,) == 0";
+        assertFalse(p.methodValidator(input));
+    }
+
+    @Test
+    public void testMethodValidator15() throws Exception {
+        String input = "some_sample(1,2) == 1 2 3";
+        assertFalse(p.methodValidator(input));
+    }
 
     @Test
     public void testMethodName1() throws Exception {
@@ -145,4 +168,69 @@ public class ParserTest {
         assertEquals(name, mp.getName());
     }
 
+    @Test
+    public void testReturnType1() throws Exception {
+        MethodPrototype mp = p.parseMethodPrototype("method() == 1");
+        String expected = "int";
+        String actual = mp.getReturnType();
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    public void testReturnType1spaces() throws Exception {
+        MethodPrototype mp = p.parseMethodPrototype("     method(     )      ==     1     ");
+        assertEquals("int",mp.getReturnType());
+        assertEquals("method", mp.getName());
+        assertEquals("==", mp.getSign());
+        assertEquals(0,mp.getParameterList().size());
+    }
+
+    @Test
+    public void testReturnType2() throws Exception {
+        MethodPrototype mp = p.parseMethodPrototype("method()");
+        assertEquals("void",mp.getReturnType());
+        assertEquals("method",mp.getName());
+        assertEquals("==", mp.getSign());
+        assertEquals(0,mp.getParameterList().size());
+    }
+
+    @Test
+    public void testReturnType3() throws Exception {
+        MethodPrototype mp = p.parseMethodPrototype("method()==\"test\"");
+        assertEquals("String",mp.getReturnType());
+
+    }
+
+    @Test
+    public void testReturnType4() throws Exception {
+        MethodPrototype mp = p.parseMethodPrototype("method()==\"test 123 ščž {{ ,./;\'\\ }}\"");
+        assertEquals("String",mp.getReturnType());
+    }
+
+    @Test
+    public void testReturnType5() throws Exception {
+        MethodPrototype mp = p.parseMethodPrototype(" _fun_123ction123() == 0");
+        assertEquals("_fun_123ction123",mp.getName());
+    }
+
+    @Test
+    public void testReturnType6() throws Exception {
+        MethodPrototype mp = p.parseMethodPrototype("a()");
+        assertEquals("a",mp.getName());
+        assertEquals(0,mp.getParameterList().size());
+        assertEquals("void",mp.getReturnType());
+        assertEquals("==",mp.getSign());
+    }
+
+    @Test
+    public void testReturnType7() throws Exception {
+        MethodPrototype mp = p.parseMethodPrototype("  method(  )  ==  true   ");
+        assertEquals("boolean",mp.getReturnType());
+    }
+
+    @Test
+    public void testReturnType8() throws Exception {
+        MethodPrototype mp = p.parseMethodPrototype("  method(  )  ==  false   ");
+        assertEquals("boolean",mp.getReturnType());
+    }
 }

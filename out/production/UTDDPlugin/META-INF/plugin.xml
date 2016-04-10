@@ -37,20 +37,16 @@
   </application-components>
 
   <actions>
-    <group id="UTDDPluginGroup" text="Unit TDD Generator" popup="true">
-      <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
-      <action id="TestClassActionID" class="main.java.TestClassAction" text="Create Test/Main Classes"
-              description="Test class generator">
-        <!--<add-to-group group-id="CodeMenu" anchor="last"/>-->
-        <!--<add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>-->
-        <keyboard-shortcut keymap="$default" first-keystroke="ctrl meta alt c"/>
-      </action>
-      <action id="TestMethodActionID" class="main.java.TestMethodAction" text="Create Test/Main Methods"
-              description="Test method generator">
-        <!--<add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>-->
-        <keyboard-shortcut keymap="$default" first-keystroke="ctrl meta alt m"/>
-      </action>
-    </group>
+    <action id="TestClassActionID" class="main.java.TestClassAction" text="Create Test/Main Classes"
+            description="Test class generator">
+      <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="ctrl meta alt c"/>
+    </action>
+    <action id="TestMethodActionID" class="main.java.TestMethodAction" text="Create Test/Main Methods"
+            description="Test method generator">
+      <add-to-group group-id="GenerateGroup" anchor="last"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="ctrl meta alt m"/>
+    </action>
   </actions>
 
 </idea-plugin>

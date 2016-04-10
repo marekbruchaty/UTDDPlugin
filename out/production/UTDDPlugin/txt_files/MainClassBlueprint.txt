@@ -1,0 +1,6 @@
+package [<PACKAGE>];
+
+[<FILE_TAMPLATE>]
+
+public class [<CLASS>] {
+}

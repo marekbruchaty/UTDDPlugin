@@ -1,0 +1,33 @@
+<templateSet group="user">
+  <template name="method" value="public $returnType$ $methodName$($methodParameters$) {&#10;    &#10;    //TODO - Add method implementation&#10;&#10;return $returnValue$;&#10;}" description="Method blueprint" toReformat="false" toShortenFQNames="true">
+    <variable name="returnType" expression="" defaultValue="&quot;returnType&quot;" alwaysStopAt="true" />
+    <variable name="methodName" expression="" defaultValue="&quot;methodName&quot;" alwaysStopAt="true" />
+    <variable name="methodParameters" expression="" defaultValue="&quot;methodParameters&quot;" alwaysStopAt="true" />
+    <variable name="returnValue" expression="" defaultValue="&quot;returnValue&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="JAVA_STATEMENT" value="true" />
+      <option name="JAVA_EXPRESSION" value="true" />
+      <option name="JAVA_DECLARATION" value="true" />
+      <option name="JAVA_COMMENT" value="true" />
+      <option name="JAVA_STRING" value="true" />
+      <option name="COMPLETION" value="true" />
+    </context>
+  </template>
+  <template name="test" value="@Test&#10;public void $testName$() throws Exception {&#10;    //TODO - Automatically generated test&#10;    $typeExpected$ expected = $valueExpected$;&#10;    $typeActual$ actual = $valueActual$;&#10;    assertEquals(expected, actual);&#10;}" description="Test blueprint" toReformat="false" toShortenFQNames="true">
+    <variable name="testName" expression="" defaultValue="&quot;testName&quot;" alwaysStopAt="true" />
+    <variable name="typeExpected" expression="" defaultValue="&quot;expectedType&quot;" alwaysStopAt="true" />
+    <variable name="valueExpected" expression="" defaultValue="&quot;expectedValue&quot;" alwaysStopAt="true" />
+    <variable name="typeActual" expression="" defaultValue="&quot;actualType&quot;" alwaysStopAt="true" />
+    <variable name="valueActual" expression="" defaultValue="&quot;actualValue&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_CODE" value="true" />
+      <option name="JAVA_STATEMENT" value="true" />
+      <option name="JAVA_EXPRESSION" value="true" />
+      <option name="JAVA_DECLARATION" value="true" />
+      <option name="JAVA_COMMENT" value="true" />
+      <option name="JAVA_STRING" value="true" />
+      <option name="COMPLETION" value="true" />
+    </context>
+  </template>
+</templateSet>

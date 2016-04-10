@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 
-public class TestPairDialog extends JDialog {
+public class ClassGenDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonGenerate;
     private JButton buttonCancel;
@@ -21,20 +21,21 @@ public class TestPairDialog extends JDialog {
     private JTextPane textPane1;
     private String currentPath;
 
-    public TestPairDialog(String[] args) {
+    public ClassGenDialog(String[] args) {
         FileOperations fc = new FileOperations();
         currentPath = args[0];
-        setLocation(getCurrentWindowCenter(contentPane));
+        setLocation(ViewUtils.getCurrentWindowCenter(contentPane));
         //setLocation(MouseInfo.getPointerInfo().getLocation());
         setContentPane(contentPane);
         setTitle("Test/Main Class Generator");
         setModal(true);
         getRootPane().setDefaultButton(buttonGenerate);
+        setSize(400,300);
 
         buttonGenerate.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 fc.createFile(classPath.getText());
-                //onOK();
+                onOK();
 
             }
         });
@@ -173,13 +174,5 @@ public class TestPairDialog extends JDialog {
     private void onCancel() {
 // add your code here if necessary
         dispose();
-    }
-
-    private Point getCurrentWindowCenter(JPanel jPanel) {
-        GraphicsDevice screen = MouseInfo.getPointerInfo().getDevice();
-        Rectangle r = screen.getDefaultConfiguration().getBounds();
-        int x = (r.width / 2 - jPanel.getWidth() / 2) / 2 + r.x;
-        int y = (r.height / 2 - jPanel.getHeight() / 2) / 2 + r.y;
-        return new Point(x, y);
     }
 }
