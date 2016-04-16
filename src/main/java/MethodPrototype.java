@@ -2,18 +2,24 @@ package main.java;
 
 import java.util.ArrayList;
 
+import static main.java.PrimitiveType.*;
+
 /**
  * Created by Marek Bruchatý on 02/04/16.
  */
 public class MethodPrototype {
-    private String raw = "";
-    private String name = "";
-    private String returnType = "void";
-    private String sign = "==";
-    private ArrayList<String> parameterList = new ArrayList<>();
+    private String raw;
+    private String name;
+    private String sign;
+    private PrimitiveType returnType;
+    private ArrayList<PrimitiveType> parameterList;
 
     public MethodPrototype(String str) throws Exception {
-        this.raw = str;
+        raw = str;
+        name = "";
+        sign = "==";
+        returnType = VOID;
+        parameterList = new ArrayList<>();
         processString(str);
 
 //        System.out.println(this.toString());
@@ -54,8 +60,8 @@ public class MethodPrototype {
         return str.length() - str.replace(String.valueOf(c), "").length();
     }
 
-    private ArrayList<String> makeParametersList(String str) throws Exception {
-        ArrayList<String> parameters = new ArrayList<>();
+    private ArrayList<PrimitiveType> makeParametersList(String str) throws Exception {
+        ArrayList<PrimitiveType> parameters = new ArrayList<>();
 
         str = str.replaceAll("\\s+", "");
         if (str.length() == 0) return parameters;
@@ -83,23 +89,23 @@ public class MethodPrototype {
         throw new Exception("Wrong comparative sign [" + sign + "].");
     }
 
-    private String returnType(String str) throws Exception {
+    private PrimitiveType returnType(String str) throws Exception {
         if (str.startsWith(" ")) str = str.substring(1);
         if (str.length() < 3) throw new Exception("Wrong return value format. ["+str+"].");
         str = str.substring(2);
         if (str.startsWith(" ")) str = str.substring(1);
         if (str.length() == 0) throw new Exception("Wrong return value format. ["+str+"].");
-        String type = parseType(str);
-        if (type.equals("void")) throw new Exception("Wrong return value. ["+str+"].");
+        PrimitiveType type = parseType(str);
+        if (type == VOID) throw new Exception("Wrong return value. ["+str+"].");
         return type;
     }
 
-    private String parseType(String str) {
-        if (str.matches("\".*\"")) return "String";
-        else if (str.matches("[0-9]+")) return "int";
-        else if (str.matches("[0-9]+\\.[0-9]*")) return "float";
-        else if (str.matches("true") || str.matches("false")) return "boolean";
-        else return "void";
+    private PrimitiveType parseType(String str) {
+        if (str.matches("\".*\"")) return STRING;
+        else if (str.matches("[0-9]+")) return INT;
+        else if (str.matches("[0-9]+\\.[0-9]*")) return FLOAT;
+        else if (str.matches("true") || str.matches("false")) return BOOLEAN;
+        else return VOID;
     }
 
 
@@ -111,8 +117,8 @@ public class MethodPrototype {
         sb.append("\nMethod parameters:\t");
 
         if (this.parameterList != null && this.parameterList.size() != 0) {
-            for (String s : this.parameterList) {
-                sb.append(s + ", ");
+            for (PrimitiveType p : this.parameterList) {
+                sb.append(p.getName() + ", ");
             }
 
             sb.delete(sb.length()-2,sb.length()-1);
@@ -132,23 +138,23 @@ public class MethodPrototype {
 
         int[] index = new int[]{1,1,1,1,1};
         if (this.getParameterList().size() != 0) {
-            for (String s : this.getParameterList()) {
-                sb.append(s).append(" ");
-                switch (s) {
-                    case "String":
-                        sb.append("str").append(index[0]++);
+            for (PrimitiveType p : this.getParameterList()) {
+                sb.append(p.getName()).append(" ");
+                switch (p) {
+                    case STRING:
+                        sb.append(STRING.getName()).append(index[0]++);
                         break;
-                    case "int":
-                        sb.append("int").append(index[1]++);
+                    case INT:
+                        sb.append(INT.getName()).append(index[1]++);
                         break;
-                    case "float":
-                        sb.append("float").append(index[2]++);
+                    case FLOAT:
+                        sb.append(FLOAT.getName()).append(index[2]++);
                         break;
-                    case "boolean":
-                        sb.append("bool").append(index[3]++);
+                    case BOOLEAN:
+                        sb.append(BOOLEAN.getName()).append(index[3]++);
                         break;
-                    case "void":
-                        sb.append("any").append(index[4]++);
+                    case VOID:
+                        sb.append(VOID.getName()).append(index[4]++);
                         break;
                 }
                 sb.append(", ");
@@ -159,16 +165,16 @@ public class MethodPrototype {
 
         sb.append(")\n");
         sb.append("  //TODO - Add method implementation here\n\n");
-        switch (this.getReturnType()) {
-            case "String": sb.append("return \"\";");
+        switch (this.returnType) {
+            case STRING: sb.append("return \"\";");
                 break;
-            case "int": sb.append("return 0;");
+            case INT: sb.append("return 0;");
                 break;
-            case "float": sb.append("return 0.0;");
+            case FLOAT: sb.append("return 0.0;");
                 break;
-            case "boolean": sb.append("return false;");
+            case BOOLEAN: sb.append("return false;");
                 break;
-            case "void":
+            case VOID:
                 break;
         }
         sb.append("\n}");
@@ -182,8 +188,24 @@ public class MethodPrototype {
         sb.append("@Test\n");
         sb.append("public void test").append(this.name).append("() {\n");
         sb.append("  //TODO - Add test implementation here\n\n");
-        sb.append("  assert();\n");
-        sb.append("}");
+        sb.append("  ");
+
+        switch (this.sign) {
+            case "==": {
+                if (this.returnType == BOOLEAN)
+                    sb.append("assertTrue();");
+                else sb.append("assertEquals(, );");
+            }
+                break;
+            case "!=": {
+                if (this.returnType == BOOLEAN)
+                    sb.append("assertFalse();");
+                else sb.append("assertNotEquals(, );");
+            }
+                break;
+        }
+
+        sb.append("\n}");
         return sb.toString();
     }
 
@@ -196,15 +218,34 @@ public class MethodPrototype {
     }
 
     public String getReturnType() {
-        return returnType;
+        return returnType.getName();
     }
 
     public String getSign() {
         return sign;
     }
 
-    public ArrayList<String> getParameterList() {
+    public ArrayList<PrimitiveType> getParameterList() {
         return parameterList;
     }
 
+}
+
+enum PrimitiveType {
+    STRING("String"),
+    INT("int"),
+    FLOAT("float"),
+    BOOLEAN("boolean"),
+    CHAR("char"),
+    VOID("void");
+
+    private String name;
+
+    PrimitiveType(String name) {
+        this.name=name;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

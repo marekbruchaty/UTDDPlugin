@@ -1,11 +1,13 @@
 package main.java.gui;
 
 import main.java.FileOperations;
+import main.java.Utils;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.io.FileFilter;
 
 public class ClassGenDialog extends JDialog {
     private JPanel contentPane;
@@ -15,26 +17,21 @@ public class ClassGenDialog extends JDialog {
     private JTextField classPath;
     private JTextField testName;
     private JTextField testPath;
-    private JTabbedPane TestMainClassGenerator;
     private JButton selectClassButton;
     private JButton selectTestButton;
-    private JTextPane textPane1;
-    private String currentPath;
+    private JTextPane PreviewPane;
 
-    public ClassGenDialog(String[] args) {
-        FileOperations fc = new FileOperations();
-        currentPath = args[0];
-        setLocation(ViewUtils.getCurrentWindowCenter(contentPane));
-        //setLocation(MouseInfo.getPointerInfo().getLocation());
-        setContentPane(contentPane);
-        setTitle("Test/Main Class Generator");
-        setModal(true);
-        getRootPane().setDefaultButton(buttonGenerate);
-        setSize(400,300);
+    private String directoryPath;
+    private String projectPath;
+
+    public ClassGenDialog(String _directoryPath, String _projectPath) {
+        directoryPath = _directoryPath;
+        projectPath = _projectPath;
+        initDialog();
 
         buttonGenerate.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                fc.createFile(classPath.getText());
+                FileOperations.createFile(classPath.getText());
                 onOK();
 
             }
@@ -45,11 +42,6 @@ public class ClassGenDialog extends JDialog {
                 onCancel();
             }
         });
-
-        className.setText("");
-        if (args.length > 0) classPath.setText(currentPath);
-        testName.setText(className.getText() + "Test");
-        testPath.setText(classPath.getText() + "Test");
 
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -68,9 +60,19 @@ public class ClassGenDialog extends JDialog {
 
         className.addKeyListener(new KeyAdapter() {
             @Override
-            public void keyTyped(KeyEvent e) {
-                super.keyTyped(e);
-                testName.setText(className.getText() + e.getKeyChar() + "Test");
+            public void keyReleased(KeyEvent e) {
+                super.keyReleased(e);
+
+                if (!Utils.isValidJavaClass(className.getText())) {
+                    className.setForeground(Color.RED);
+                    PreviewPane.setText("Warning! " + className.getText() + " is not valid Java Class name.");
+                    testName.setText("");
+                } else {
+                    className.setForeground(Color.LIGHT_GRAY);
+                    PreviewPane.setText("Class name OK.");
+                    testName.setText(className.getText()+"Test");
+                }
+
             }
         });
 
@@ -102,16 +104,8 @@ public class ClassGenDialog extends JDialog {
         selectClassButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setCurrentDirectory(new File(currentPath));
-                int result = fileChooser.showOpenDialog(fileChooser);
-                if (result == JFileChooser.APPROVE_OPTION) {
-                    File selectedFile = fileChooser.getSelectedFile();
-                    System.out.println("Selected file: " + selectedFile.getAbsolutePath());
-                }
-
-
+                String directoryPath = directoryChooser();
+                System.out.println("Selected directory: " + directoryPath);
             }
         });
 
@@ -119,51 +113,37 @@ public class ClassGenDialog extends JDialog {
         selectTestButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-
-                JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setCurrentDirectory(new File(currentPath));
-                int result = fileChooser.showOpenDialog(fileChooser);
-                if (result == JFileChooser.APPROVE_OPTION) {
-                    File selectedFile = fileChooser.getSelectedFile();
-                    System.out.println("Selected file: " + selectedFile.getAbsolutePath());
-                }
-
+                String directoryPath = directoryChooser();
+                System.out.println("Selected directory: " + directoryPath);
             }
         });
     }
 
-
-    public JTextField getClassName() {
-        return className;
+    private void initDialog() {
+        setVisible(true);
+        setTitle("Test/Main Class Generator");
+        setLocation(ViewUtils.getCurrentWindowCenter(contentPane));
+        setContentPane(contentPane);
+        Dimension dimension = new Dimension(500,400);
+        setSize(dimension);
+        setMinimumSize(dimension);
     }
 
-    public void setClassName(JTextField className) {
-        this.className = className;
+    private String directoryChooser() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File(directoryPath));
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int result = fileChooser.showOpenDialog(fileChooser);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+            return selectedFile.getAbsolutePath();
+        }
+        return null;
     }
 
-    public JTextField getClassPath() {
-        return classPath;
-    }
-
-    public void setClassPath(JTextField classPath) {
-        this.classPath = classPath;
-    }
-
-    public JTextField getTestName() {
-        return testName;
-    }
-
-    public void setTestName(JTextField testName) {
-        this.testName = testName;
-    }
-
-    public JTextField getTestPath() {
-        return testPath;
-    }
-
-    public void setTestPath(JTextField testPath) {
-        this.testPath = testPath;
+    private String getShortenPath() {
+        return directoryPath.substring(projectPath.length());
     }
 
     private void onOK() {
