@@ -1,27 +1,23 @@
 package main.java.gui;
-
+import com.intellij.ui.JBColor;
 import main.java.MethodPrototype;
 import main.java.Parser;
-
 import javax.swing.*;
-import javax.swing.text.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.Vector;
 
-/**
- * Created by Marek Bruchatý on 06/04/16.
- */
 public class MethodGenDialog extends JDialog{
     private JPanel contentPane;
     private JButton cancelButton;
     private JButton generateButton;
-    private JTextField methodPrototype;
+    private JTextField methodPrototypeTextField;
     private JTextPane methodPreview;
     private JTextPane testMethodPreview;
+    private MethodPrototype methodPrototype;
+    private boolean isOK;
 
     public MethodGenDialog() {
         setVisible(true);
@@ -31,42 +27,55 @@ public class MethodGenDialog extends JDialog{
         Dimension dimension = new Dimension(500,400);
         setSize(dimension);
         setMinimumSize(dimension);
+        isOK = false;
 
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
+                onCancel();
             }
         });
 
         generateButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
+            public void actionPerformed(ActionEvent e) { onOK(); }
         });
 
-        methodPrototype.addKeyListener(new KeyAdapter() {
-
+        methodPrototypeTextField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
                 super.keyReleased(e);
-
-                String text = methodPrototype.getText();
-
+                String text = methodPrototypeTextField.getText();
                 try {
-                    methodPrototype.setForeground(Color.LIGHT_GRAY);
-                    MethodPrototype mp = Parser.parseMethodPrototype(text);
-                    methodPreview.setText(mp.constructMethod());
-                    testMethodPreview.setText(mp.constructTestMethod());
+                    methodPrototypeTextField.setForeground(JBColor.LIGHT_GRAY);
+                    methodPrototype = Parser.parseMethodPrototype(text);
+                    methodPreview.setText(methodPrototype.constructMethod());
+                    testMethodPreview.setText(methodPrototype.constructTestMethod());
                 } catch (Exception exception) {
-                    methodPrototype.setForeground(Color.RED);
+                    methodPrototypeTextField.setForeground(JBColor.RED);
                     methodPreview.setText("Wrong format\n" + exception.getMessage());
                     testMethodPreview.setText("");
                 }
             }
-
         });
+    }
+
+    public MethodPrototype getMethodPrototype() {
+        return methodPrototype;
+    }
+
+    private void onOK() {
+        isOK = true;
+        dispose();
+    }
+
+    private void onCancel() {
+        isOK = false;
+        dispose();
+    }
+
+    public boolean isOK() {
+        return isOK;
     }
 }
 
