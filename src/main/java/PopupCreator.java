@@ -18,12 +18,10 @@ public class PopupCreator {
         StatusBar statusBar = WindowManager.getInstance().getStatusBar(DataKeys.PROJECT.getData(e.getDataContext()));
 
         JBPopupFactory.getInstance()
-                .createHtmlTextBalloonBuilder("", messageType, null)
+                .createHtmlTextBalloonBuilder(str, messageType, null)
                 .setFadeoutTime(2500)
                 .createBalloon()
                 .show(RelativePoint.getCenterOf(statusBar.getComponent()), Balloon.Position.atLeft);
     }
-
-    //Messages.showInfoMessage("Text","Title");
 
 }

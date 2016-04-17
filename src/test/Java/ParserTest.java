@@ -25,33 +25,43 @@ public class ParserTest {
 
     //Main path -> Test path
 
-    @Test
-    public void testPath1() throws Exception {
-        String path1 = "/Users/Marek/IdeaProjects/PluginTestProject/src/com/company/Main/Java/Sample.java";
-        String test1 = "/Users/Marek/IdeaProjects/PluginTestProject/src/com/company/Test/Java/Sample.java";
-        assertEquals(test1, p.getTestPath(path1));
-    }
+//    @Test
+//    public void testPath1() throws Exception {
+//        String path1 = "/Users/Marek/IdeaProjects/PluginTestProject/src/com/company/Main/Java/Sample.java";
+//        String test1 = "/Users/Marek/IdeaProjects/PluginTestProject/src/com/company/Test/Java/Sample.java";
+//        assertEquals(test1, p.getTestPath(path1));
+//    }
+//
+//    @Test
+//    public void testPath2() throws Exception {
+//        String path2 = "/Users/Marek/IdeaProjects/PluginTestProject/src/com/company/Main/Java/AnotherMain/Sample.java";
+//        String test2 = "/Users/Marek/IdeaProjects/PluginTestProject/src/com/company/Test/Java/AnotherMain/Sample.java";
+//        assertEquals(test2, p.getTestPath(path2));
+//    }
+//
+//    @Test
+//    public void testPath3() throws Exception {
+//        String path3 = "/Users/Marek/IdeaProjects/PluginTestProject/src/com/company/Main/Sample.java";
+//        String test3 = "/Users/Marek/IdeaProjects/PluginTestProject/src/com/company/Test/Sample.java";
+//        assertEquals(test3, p.getTestPath(path3));
+//    }
+//
+//    @Test
+//    public void testPath4() throws Exception {
+//        String path4 = "/Users/Marek/IdeaProjects/PluginTestProject/src/com/company/main/Sample.java";
+//        String test4 = "/Users/Marek/IdeaProjects/PluginTestProject/src/com/company/test/Sample.java";
+//        assertEquals(test4, p.getTestPath(path4));
+//    }
+
+    final String projectPath = "/Users/Marek/IdeaProjects/PluginTestProject";
 
     @Test
-    public void testPath2() throws Exception {
-        String path2 = "/Users/Marek/IdeaProjects/PluginTestProject/src/com/company/Main/Java/AnotherMain/Sample.java";
-        String test2 = "/Users/Marek/IdeaProjects/PluginTestProject/src/com/company/Test/Java/AnotherMain/Sample.java";
-        assertEquals(test2, p.getTestPath(path2));
+    public void simplePath() throws Exception {
+        final String mp = "/Users/Marek/IdeaProjects/PluginTestProject/src/com/company/main/java";
+        final String tp = "/Users/Marek/IdeaProjects/PluginTestProject/src/com/company/test/java";
+        assertEquals(mp,p.getTestPath(projectPath,mp));
     }
 
-    @Test
-    public void testPath3() throws Exception {
-        String path3 = "/Users/Marek/IdeaProjects/PluginTestProject/src/com/company/Main/Sample.java";
-        String test3 = "/Users/Marek/IdeaProjects/PluginTestProject/src/com/company/Test/Sample.java";
-        assertEquals(test3, p.getTestPath(path3));
-    }
-
-    @Test
-    public void testPath4() throws Exception {
-        String path4 = "/Users/Marek/IdeaProjects/PluginTestProject/src/com/company/main/Sample.java";
-        String test4 = "/Users/Marek/IdeaProjects/PluginTestProject/src/com/company/test/Sample.java";
-        assertEquals(test4, p.getTestPath(path4));
-    }
 
     @Test
     public void testMethodValidator1() throws Exception {

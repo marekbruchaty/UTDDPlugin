@@ -4,11 +4,13 @@ import main.java.MethodPrototype;
 import main.java.Parser;
 
 import javax.swing.*;
+import javax.swing.text.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Vector;
 
 /**
  * Created by Marek Bruchatý on 06/04/16.
@@ -23,7 +25,7 @@ public class MethodGenDialog extends JDialog{
 
     public MethodGenDialog() {
         setVisible(true);
-        setTitle("Method generator");
+        setTitle("New method pair");
         setLocation(ViewUtils.getCurrentWindowCenter(contentPane));
         setContentPane(contentPane);
         Dimension dimension = new Dimension(500,400);
@@ -33,15 +35,14 @@ public class MethodGenDialog extends JDialog{
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                onCancel();
+                dispose();
             }
         });
-
 
         generateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                onOK();
+                dispose();
             }
         });
 
@@ -52,7 +53,6 @@ public class MethodGenDialog extends JDialog{
                 super.keyReleased(e);
 
                 String text = methodPrototype.getText();
-                System.out.print(text + "\n");
 
                 try {
                     methodPrototype.setForeground(Color.LIGHT_GRAY);
@@ -68,14 +68,5 @@ public class MethodGenDialog extends JDialog{
 
         });
     }
-
-    private void onOK() {
-    // add your code here
-        dispose();
-    }
-
-    private void onCancel() {
-    // add your code here if necessary
-        dispose();
-    }
 }
+

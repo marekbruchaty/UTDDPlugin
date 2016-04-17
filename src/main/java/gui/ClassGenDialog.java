@@ -1,13 +1,20 @@
 package main.java.gui;
 
+import com.intellij.facet.ui.libraries.FacetLibrariesValidator;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.CommonDataKeys;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.MessageType;
+import main.java.ClassPair;
 import main.java.FileOperations;
+import main.java.PopupCreator;
 import main.java.Utils;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
-import java.io.FileFilter;
+import java.io.IOException;
 
 public class ClassGenDialog extends JDialog {
     private JPanel contentPane;
@@ -17,29 +24,55 @@ public class ClassGenDialog extends JDialog {
     private JTextField classPath;
     private JTextField testName;
     private JTextField testPath;
-    private JButton selectClassButton;
-    private JButton selectTestButton;
-    private JTextPane PreviewPane;
+    private JTextPane previewPane;
 
-    private String directoryPath;
-    private String projectPath;
+    private ClassPair classPair;
 
-    public ClassGenDialog(String _directoryPath, String _projectPath) {
-        directoryPath = _directoryPath;
-        projectPath = _projectPath;
+    public ClassGenDialog(String testDir, String projectDir, AnActionEvent actionEvent) {
         initDialog();
+        createClassPair(testDir, projectDir);
+        initFields();
 
         buttonGenerate.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                FileOperations.createFile(classPath.getText());
-                onOK();
+                try {
+                    FileOperations.createFile(classPair.getTestClass(),classPair.getTestClassBody());
+                    FileOperations.createFile(classPair.getMainClass(),classPair.getMainClassBody());
+                    PopupCreator.createPopup(actionEvent,classPair.getTestClass().getName() +
+                            " and " + classPair.getMainClass().getName() + " created successfully.", MessageType.INFO);
+                } catch (IOException ioe) {
+                    PopupCreator.createPopup(actionEvent,ioe.getMessage(), MessageType.ERROR);
+                }
+                actionEvent.getData(CommonDataKeys.PROJECT).getBaseDir().refresh(false,true);
+                dispose();
+            }
+        });
+
+
+        testName.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                super.keyReleased(e);
+
+                if (!Utils.isValidJavaClass(testName.getText())) {
+                    signalBadFormat("\"" + testName.getText() + "\" is not valid Java class name.");
+                } else if (!testName.getText().toLowerCase().endsWith("test")){
+                    signalBadFormat("\"Test\" suffix missing: \"" + testName.getText() + "\"");
+                } else {
+                    try {
+                        classPair.setTestClass(testName.getText()+".java");
+                        signalReady(classPair.getTestClassBody());
+                    } catch (Exception ex) {
+                        signalBadFormat(ex.getMessage());
+                    }
+                }
 
             }
         });
 
         buttonCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onCancel();
+                dispose();
             }
         });
 
@@ -47,81 +80,45 @@ public class ClassGenDialog extends JDialog {
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                onCancel();
+                dispose();
             }
         });
 
         // call onCancel() on ESCAPE
         contentPane.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onCancel();
+                dispose();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+    }
 
-        className.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyReleased(KeyEvent e) {
-                super.keyReleased(e);
+    private void createClassPair(String testDir, String projectDir) {
+        try {
+            classPair = new ClassPair(testDir, projectDir);
+        } catch (Exception e) {
+            previewPane.setText(e.toString());
+        }
+    }
 
-                if (!Utils.isValidJavaClass(className.getText())) {
-                    className.setForeground(Color.RED);
-                    PreviewPane.setText("Warning! " + className.getText() + " is not valid Java Class name.");
-                    testName.setText("");
-                } else {
-                    className.setForeground(Color.LIGHT_GRAY);
-                    PreviewPane.setText("Class name OK.");
-                    testName.setText(className.getText()+"Test");
-                }
+    private void signalBadFormat(String preview) {
+        testName.setForeground(Color.RED);
+        className.setForeground(Color.RED);
+        previewPane.setText(preview);
+        className.setText("");
+        buttonGenerate.setEnabled(false);
+    }
 
-            }
-        });
-
-        classPath.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                super.keyTyped(e);
-
-            }
-        });
-
-
-        testName.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                super.keyTyped(e);
-            }
-        });
-
-
-        testPath.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                super.keyTyped(e);
-            }
-        });
-
-
-        selectClassButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String directoryPath = directoryChooser();
-                System.out.println("Selected directory: " + directoryPath);
-            }
-        });
-
-
-        selectTestButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String directoryPath = directoryChooser();
-                System.out.println("Selected directory: " + directoryPath);
-            }
-        });
+    private void signalReady(String preview) {
+        testName.setForeground(Color.LIGHT_GRAY);
+        className.setForeground(Color.LIGHT_GRAY);
+        previewPane.setText(preview);
+        className.setText(classPair.getMainClass().getName().replace(".java",""));
+        buttonGenerate.setEnabled(true);
     }
 
     private void initDialog() {
         setVisible(true);
-        setTitle("Test/Main Class Generator");
+        setTitle("New pair");
         setLocation(ViewUtils.getCurrentWindowCenter(contentPane));
         setContentPane(contentPane);
         Dimension dimension = new Dimension(500,400);
@@ -129,30 +126,23 @@ public class ClassGenDialog extends JDialog {
         setMinimumSize(dimension);
     }
 
-    private String directoryChooser() {
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setCurrentDirectory(new File(directoryPath));
-        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        int result = fileChooser.showOpenDialog(fileChooser);
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            System.out.println("Selected file: " + selectedFile.getAbsolutePath());
-            return selectedFile.getAbsolutePath();
-        }
-        return null;
+    private void initFields() {
+        testPath.setText(classPair.getTestDirectory().toString());
+        testName.setText("");
+        classPath.setText(classPair.getMainDirectory().toString());
+        className.setText("");
     }
 
-    private String getShortenPath() {
-        return directoryPath.substring(projectPath.length());
-    }
-
-    private void onOK() {
-// add your code here
-        dispose();
-    }
-
-    private void onCancel() {
-// add your code here if necessary
-        dispose();
-    }
+//    private String directoryChooser() {
+//        JFileChooser fileChooser = new JFileChooser();
+//        fileChooser.setCurrentDirectory(classPair.getMainDirectory().toFile());
+//        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+//        int result = fileChooser.showOpenDialog(fileChooser);
+//        if (result == JFileChooser.APPROVE_OPTION) {
+//            File selectedFile = fileChooser.getSelectedFile();
+//            System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+//            return selectedFile.getAbsolutePath();
+//        }
+//        return null;
+//    }
 }

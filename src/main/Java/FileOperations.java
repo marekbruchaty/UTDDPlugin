@@ -1,16 +1,13 @@
 package main.java;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 
 /**
  * Created by Marek Bruchatý on 31/03/16.
  */
 public class FileOperations {
 
-    public static void createFile(String file) {
+    public static void createFile2(String file) {
         File targetFile = new File(file);
         File parent = targetFile.getParentFile();
 
@@ -32,9 +29,29 @@ public class FileOperations {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        writer.println("public class [CLASS-NAME] {");
-        writer.println("}");
         writer.close();
     }
 
+    /**
+     * Returns true if file was created successfully, false otherwise
+     * */
+    public static boolean createFile(File file, String content) throws IOException {
+        if (file.getParent() != null)
+            file.getParentFile().mkdirs();
+        try {
+            file.createNewFile();
+            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(content);
+            bw.close();
+            return true;
+        } catch (IOException e) {
+            if (file.exists()) {
+                if (file.delete()) {
+                    throw new IOException("Delete action error. File was created but can not be written to.");
+                }
+            }
+            return false;
+        }
+    }
 }
