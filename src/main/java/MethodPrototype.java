@@ -12,19 +12,22 @@ import static main.java.PrimitiveType.*;
 public class MethodPrototype {
     private String raw;
     private String name;
-    private String sign;
-    private PrimitiveType returnType;
-    private ArrayList<PrimitiveType> parameterTypes;
-    private ArrayList<String> parameterValues;
+    private String comparativeSign;
+    private TypeValuePair returnType;
+    private ArrayList<TypeValuePair> parameters;
 
 
     public MethodPrototype(String str) throws Exception {
         raw = str;
-        name = "";
-        sign = "==";
-        returnType = VOID;
-        parameterTypes = new ArrayList<>();
+        setDefaults();
         processString(str);
+    }
+
+    private void setDefaults() {
+        this.name = "";
+        this.comparativeSign = "==";
+        this.returnType = new TypeValuePair(VOID,"");
+        this.parameters = new ArrayList<>();
     }
 
     private void processString(String str) throws Exception {
@@ -39,12 +42,12 @@ public class MethodPrototype {
             this.name = parseName(str_split[0]);
         } else if (str_split.length == 2) {
             this.name = parseName(str_split[0]);
-            this.parameterTypes = makeParametersList(str_split[1]);
+            this.parameters = makeParametersList(str_split[1]);
         } else if (str_split.length == 3) {
             this.name = parseName(str_split[0]);
-            this.parameterTypes = makeParametersList(str_split[1]);
-            this.sign = parseSign(str_split[2]);
-            this.returnType = returnType(str_split[2]);
+            this.parameters = makeParametersList(str_split[1]);
+            this.comparativeSign = extractComparativeSign(str_split[2]);
+            this.returnType = extractRetrnTypeValuePair(str_split[2]);
         } else throw new Exception("Wrong use of parentheses.");
     }
 
@@ -62,16 +65,15 @@ public class MethodPrototype {
         return str.length() - str.replace(String.valueOf(c), "").length();
     }
 
-    private ArrayList<PrimitiveType> makeParametersList(String str) throws Exception {
-        ArrayList<PrimitiveType> parameters = new ArrayList<>();
+    private ArrayList<TypeValuePair> makeParametersList(String str) throws Exception {
+        ArrayList<TypeValuePair> parameters = new ArrayList<>();
 
         str = str.replaceAll("\\s+", "");
         if (str.length() == 0) return parameters;
-
-        String[] par_array = str.split(",");
-        for (String s: par_array) {
+        if (str.contains(",,")) throw new Exception("Empty parameter.");
+        for (String s: str.split(",")) {
             if (s.isEmpty()) throw new Exception("Empty parameter.");
-            parameters.add(parseType(s));
+            parameters.add(extractTypeValuePair(s));
         }
         return parameters;
     }
@@ -82,67 +84,47 @@ public class MethodPrototype {
         else throw new Exception("Wrong name format ["+str+"].");
     }
 
-    private String parseSign(String str) throws Exception {
+    private String extractComparativeSign(String str) throws Exception {
         if (str.length() < 3)
-            throw new Exception("Wrong comparative sign ["+str.replaceAll("\\s+", "")+"].");
+            throw new Exception("Wrong comparative comparativeSign ["+str.replaceAll("\\s+", "")+"].");
         str = str.replaceAll("\\s+", "");
         String sign = str.substring(0, 2);
         if (sign.matches("!=") || sign.matches("==")) return sign;
-        throw new Exception("Wrong comparative sign [" + sign + "].");
+        throw new Exception("Wrong comparative comparativeSign [" + sign + "].");
     }
 
-    private PrimitiveType returnType(String str) throws Exception {
-        if (str.startsWith(" ")) str = str.substring(1);
+    private TypeValuePair extractRetrnTypeValuePair(String str) throws Exception {
+        str = str.trim();
         if (str.length() < 3) throw new Exception("Wrong return value format. ["+str+"].");
         str = str.substring(2);
         if (str.startsWith(" ")) str = str.substring(1);
         if (str.length() == 0) throw new Exception("Wrong return value format. ["+str+"].");
-        PrimitiveType type = parseType(str);
-        if (type == VOID) throw new Exception("Wrong return value. ["+str+"].");
-        return type;
+        return extractTypeValuePair(str);
     }
 
-    private PrimitiveType parseType(String str) {
-        if (str.matches("\".*\"")) return STRING;
-        else if (str.matches("[0-9]+")) return INT;
-        else if (str.matches("[0-9]+\\.[0-9]*")) return FLOAT;
-        else if (str.matches("true") || str.matches("false")) return BOOLEAN;
-        else return VOID;
-    }
-
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("\nPrototype:\t\t\t").append(this.raw);
-        sb.append("\nMethod name:\t\t").append(this.name);
-        sb.append("\nMethod parameters:\t");
-
-        if (this.parameterTypes != null && this.parameterTypes.size() != 0) {
-            for (PrimitiveType p : this.parameterTypes) {
-                sb.append(p.getName()).append(", ");
-            }
-
-            sb.delete(sb.length()-2,sb.length()-1);
-        }
-
-        sb.append("\nMethod sign:\t\t").append(this.sign);
-        sb.append("\nMethod returnType:\t\t").append(this.returnType);
-
-        return sb.toString();
+    private TypeValuePair extractTypeValuePair(String str) throws Exception {
+        PrimitiveType pt;
+        if (str.matches("\".*\"")) pt = STRING;
+        else if (str.matches("\'.\'")) pt = CHAR;
+        else if (str.matches("[0-9]+")) pt = INT;
+        else if (str.matches("[0-9]+\\.[0-9]*")) pt = FLOAT;
+        else if (str.matches("true") || str.matches("false")) pt = BOOLEAN;
+        else if (str.matches("void")) pt = VOID;
+        else if (str.matches("[_a-zA-Z]+[_a-zA-Z0-9]*")) pt = OBJECT;
+        else throw new Exception("Wrong return value format. ["+str+"].");
+        return new TypeValuePair(pt,str);
     }
 
     public String constructMethod() {
 
         StringBuilder sb = new StringBuilder();
-
         sb.append("public ").append(this.getReturnType()).append(" ").append(this.getName()).append("(");
 
         int[] index = new int[]{1,1,1,1,1};
-        if (this.getParameterTypes().size() != 0) {
-            for (PrimitiveType p : this.getParameterTypes()) {
-                sb.append(p.getName()).append(" ");
-                switch (p) {
+        if (this.parameters.size() != 0) {
+            for (TypeValuePair p : this.parameters) {
+                sb.append(p.getType().getName()).append(" ");
+                switch (p.getType()) {
                     case STRING:
                         sb.append(STRING.getName()).append(index[0]++);
                         break;
@@ -155,8 +137,8 @@ public class MethodPrototype {
                     case BOOLEAN:
                         sb.append(BOOLEAN.getName()).append(index[3]++);
                         break;
-                    case VOID:
-                        sb.append(VOID.getName()).append(index[4]++);
+                    case OBJECT:
+                        sb.append(OBJECT.getName()).append(index[4]++);
                         break;
                 }
                 sb.append(", ");
@@ -166,8 +148,8 @@ public class MethodPrototype {
         }
 
         sb.append(") {\n");
-        sb.append("  //TODO - Add method implementation here\n\n");
-        switch (this.returnType) {
+        sb.append("\t//TODO - Automatically generated method\n\n");
+        switch (this.returnType.getType()) {
             case STRING: sb.append("return \"\";");
                 break;
             case INT: sb.append("return 0;");
@@ -175,6 +157,8 @@ public class MethodPrototype {
             case FLOAT: sb.append("return 0.0;");
                 break;
             case BOOLEAN: sb.append("return false;");
+                break;
+            case OBJECT: sb.append("return void;");
                 break;
             case VOID:
                 break;
@@ -184,38 +168,33 @@ public class MethodPrototype {
         return sb.toString();
     }
 
-    public String constructTestMethod2() {
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("@Test\n");
-        sb.append("public void test").append(this.name).append("() {\n");
-        sb.append("  //TODO - Add test implementation here\n\n");
-        sb.append("  ");
-
-        switch (this.sign) {
-            case "==": {
-                if (this.returnType == BOOLEAN)
-                    sb.append("assertTrue();");
-                else sb.append("assertEquals(, );");
-            }
-                break;
-            case "!=": {
-                if (this.returnType == BOOLEAN)
-                    sb.append("assertFalse();");
-                else sb.append("assertNotEquals(, );");
-            }
-                break;
-        }
-
-        sb.append("\n}");
-        return sb.toString();
-    }
-
     public String constructTestMethod() {
         StringBuilder sb = new StringBuilder();
         sb.append("@Test\n");
         sb.append("public void test").append(this.getName()).append("() throws Exception {\n");
         sb.append("\t//TODO - Automatically generated test\n");
+
+//        switch (this.comparativeSign) {
+//            case "==": {
+//                if (this.extractRetrnTypeValuePair == BOOLEAN) {
+//                    sb.append("assertTrue();");
+//                }
+//                else {
+//                    sb.append("assertEquals(, );");
+//                }
+//            }
+//            break;
+//            case "!=": {
+//                if (this.extractRetrnTypeValuePair == BOOLEAN) {
+//                    sb.append("assertFalse();");
+//                }
+//                else {
+//                    sb.append("assertNotEquals(, );");
+//                }
+//            }
+//            break;
+//        }
+
         sb.append("\texpectedType expected = expectedValue;\n");
         sb.append("\tactualType = actualValue;\n");
         sb.append("\tassertEquals(expected, actual);\n");
@@ -231,61 +210,17 @@ public class MethodPrototype {
         return name;
     }
 
-    public String getReturnType() {
-        return returnType.getName();
+    public String getComparativeSign() {
+        return comparativeSign;
     }
 
-    public String getSign() {
-        return sign;
+    public TypeValuePair getReturnType() {
+        return returnType;
     }
 
-    public ArrayList<PrimitiveType> getParameterTypes() {
-        return parameterTypes;
+    public ArrayList<TypeValuePair> getParameters() {
+        return parameters;
     }
 
 }
 
-enum PrimitiveType {
-    STRING("String"),
-    INT("int"),
-    FLOAT("float"),
-    BOOLEAN("boolean"),
-    CHAR("char"),
-    VOID("void");
-
-    private String name;
-
-    PrimitiveType(String name) {
-        this.name=name;
-    }
-
-    public String getName() {
-        return name;
-    }
-}
-
-class TypeValuePair {
-    private PrimitiveType type;
-    private String value;
-
-    public TypeValuePair(PrimitiveType type, String value) {
-        this.type = type;
-        this.value = value;
-    }
-
-    public PrimitiveType getType() {
-        return type;
-    }
-
-    public void setType(PrimitiveType type) {
-        this.type = type;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-}
