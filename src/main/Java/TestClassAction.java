@@ -1,15 +1,12 @@
 package main.java;
 
-import com.intellij.ide.IdeView;
-import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.MessageType;
 import com.intellij.pom.Navigatable;
-import com.intellij.psi.PsiFile;
 import main.java.gui.ClassGenDialog;
-
-import java.io.File;
-import java.io.IOException;
 
 public class TestClassAction extends AnAction {
 

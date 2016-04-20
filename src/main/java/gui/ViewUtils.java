@@ -4,8 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by Marek Bruchatý on 06/04/16.
+ * Author: Marek Bruchatý
+ * Date: 06/04/16.
  */
+
 public class ViewUtils {
 
     public static Point getCurrentWindowCenter(JPanel jPanel) {

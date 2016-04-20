@@ -1,14 +1,11 @@
 package main.java.gui;
 
-import com.intellij.facet.ui.libraries.FacetLibrariesValidator;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.MessageType;
 import main.java.ClassPair;
-import main.java.FileOperations;
 import main.java.PopupCreator;
-import main.java.Utils;
+import main.java.FileUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,8 +33,8 @@ public class ClassGenDialog extends JDialog {
         buttonGenerate.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    FileOperations.createFile(classPair.getTestClass(),classPair.getTestClassBody());
-                    FileOperations.createFile(classPair.getMainClass(),classPair.getMainClassBody());
+                    FileUtils.createFile(classPair.getTestClass(),classPair.getTestClassBody());
+                    FileUtils.createFile(classPair.getMainClass(),classPair.getMainClassBody());
                     PopupCreator.createPopup(actionEvent,classPair.getTestClass().getName() +
                             " and " + classPair.getMainClass().getName() + " created successfully.", MessageType.INFO);
                 } catch (IOException ioe) {
@@ -54,7 +51,7 @@ public class ClassGenDialog extends JDialog {
             public void keyReleased(KeyEvent e) {
                 super.keyReleased(e);
 
-                if (!Utils.isValidJavaClass(testName.getText())) {
+                if (!FileUtils.isValidJavaClass(testName.getText())) {
                     signalBadFormat("\"" + testName.getText() + "\" is not valid Java class name.");
                 } else if (!testName.getText().toLowerCase().endsWith("test")){
                     signalBadFormat("\"Test\" suffix missing: \"" + testName.getText() + "\"");

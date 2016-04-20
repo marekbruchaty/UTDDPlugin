@@ -10,8 +10,10 @@ import com.intellij.openapi.wm.WindowManager;
 import com.intellij.ui.awt.RelativePoint;
 
 /**
- * Created by Marek Bruchatý on 04/04/16.
+ * Author: Marek Bruchatý
+ * Date: 04/04/16.
  */
+
 public class PopupCreator {
 
     public static void createPopup(AnActionEvent e, String str, MessageType messageType) {

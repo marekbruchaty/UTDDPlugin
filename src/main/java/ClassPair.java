@@ -29,23 +29,8 @@ public class ClassPair {
     }
 
     private Path genMainClassDirectory(Path tcDirectory) {
-        return swapDirectory(tcDirectory, "test", "main");
+        return FileUtils.swapDirectory(projectDirectory, tcDirectory, "test", "main");
     }
-
-    private Path swapDirectory(Path path, String from, String to) {
-        String shortPath = path.toString().replace(this.projectDirectory.toString(),"");
-        StringBuilder sb = new StringBuilder();
-        Iterator<Path> pathIterator = Paths.get("/" + shortPath).iterator();
-        sb.append(this.projectDirectory).append("/");
-        while (pathIterator.hasNext()) {
-            Path p = pathIterator.next();
-            if (p.toString().toLowerCase().compareTo(from.toLowerCase())==0) sb.append(to);
-            else sb.append(p.toString());
-            sb.append("/");
-        }
-        return Paths.get(sb.toString());
-    }
-
 
     private void validatePath(String path) throws Exception {
         try {
@@ -60,7 +45,7 @@ public class ClassPair {
         this.testClass = new File(testDirectory + "/" + testClassName);
         if (testClassName.toLowerCase().contains("test")) {
             String testLess = testClassName.substring(0, testClassName.length() - "test.java".length())+".java";
-            if (!Utils.isValidJavaClass(testLess)) throw new Exception("Class \" " + testLess + " \"is not valid Java class.");
+            if (!FileUtils.isValidJavaClass(testLess)) throw new Exception("Class \" " + testLess + " \"is not valid Java class.");
             this.mainClass = new File(mainDirectory + "/" + testLess);
         }
     }

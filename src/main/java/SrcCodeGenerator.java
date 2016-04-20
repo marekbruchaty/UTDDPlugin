@@ -1,8 +1,10 @@
 package main.java;
 
 /**
- * Created by Marek Bruchatý on 04/04/16.
+ * Author: Marek Bruchatý
+ * Date: 04/04/16.
  */
+
 public class SrcCodeGenerator {
 
     public String genMainClass() {

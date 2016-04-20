@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import static main.java.PrimitiveType.*;
 
 /**
- * Created by Marek Bruchatý on 02/04/16.
+ * Author: Marek Bruchatý
+ * Date: 02/04/16.
  */
+
 public class MethodPrototype {
     private String raw;
     private String name;
@@ -21,8 +23,6 @@ public class MethodPrototype {
         returnType = VOID;
         parameterList = new ArrayList<>();
         processString(str);
-
-//        System.out.println(this.toString());
     }
 
     private void processString(String str) throws Exception {
@@ -112,20 +112,20 @@ public class MethodPrototype {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("\nPrototype:\t\t\t" + this.raw);
-        sb.append("\nMethod name:\t\t" + this.name);
+        sb.append("\nPrototype:\t\t\t").append(this.raw);
+        sb.append("\nMethod name:\t\t").append(this.name);
         sb.append("\nMethod parameters:\t");
 
         if (this.parameterList != null && this.parameterList.size() != 0) {
             for (PrimitiveType p : this.parameterList) {
-                sb.append(p.getName() + ", ");
+                sb.append(p.getName()).append(", ");
             }
 
             sb.delete(sb.length()-2,sb.length()-1);
         }
 
-        sb.append("\nMethod sign:\t\t" + this.sign);
-        sb.append("\nMethod returnType:\t\t" + this.returnType);
+        sb.append("\nMethod sign:\t\t").append(this.sign);
+        sb.append("\nMethod returnType:\t\t").append(this.returnType);
 
         return sb.toString();
     }
@@ -163,7 +163,7 @@ public class MethodPrototype {
             sb.deleteCharAt(sb.length() - 1);
         }
 
-        sb.append(")\n");
+        sb.append(") {\n");
         sb.append("  //TODO - Add method implementation here\n\n");
         switch (this.returnType) {
             case STRING: sb.append("return \"\";");
