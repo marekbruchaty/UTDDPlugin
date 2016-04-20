@@ -14,14 +14,16 @@ public class MethodPrototype {
     private String name;
     private String sign;
     private PrimitiveType returnType;
-    private ArrayList<PrimitiveType> parameterList;
+    private ArrayList<PrimitiveType> parameterTypes;
+    private ArrayList<String> parameterValues;
+
 
     public MethodPrototype(String str) throws Exception {
         raw = str;
         name = "";
         sign = "==";
         returnType = VOID;
-        parameterList = new ArrayList<>();
+        parameterTypes = new ArrayList<>();
         processString(str);
     }
 
@@ -37,13 +39,13 @@ public class MethodPrototype {
             this.name = parseName(str_split[0]);
         } else if (str_split.length == 2) {
             this.name = parseName(str_split[0]);
-            this.parameterList = makeParametersList(str_split[1]);
+            this.parameterTypes = makeParametersList(str_split[1]);
         } else if (str_split.length == 3) {
             this.name = parseName(str_split[0]);
-            this.parameterList = makeParametersList(str_split[1]);
+            this.parameterTypes = makeParametersList(str_split[1]);
             this.sign = parseSign(str_split[2]);
             this.returnType = returnType(str_split[2]);
-        } else throw new Exception("Wrong use of parenthases.");
+        } else throw new Exception("Wrong use of parentheses.");
     }
 
     private void validate(String str) throws Exception {
@@ -116,8 +118,8 @@ public class MethodPrototype {
         sb.append("\nMethod name:\t\t").append(this.name);
         sb.append("\nMethod parameters:\t");
 
-        if (this.parameterList != null && this.parameterList.size() != 0) {
-            for (PrimitiveType p : this.parameterList) {
+        if (this.parameterTypes != null && this.parameterTypes.size() != 0) {
+            for (PrimitiveType p : this.parameterTypes) {
                 sb.append(p.getName()).append(", ");
             }
 
@@ -137,8 +139,8 @@ public class MethodPrototype {
         sb.append("public ").append(this.getReturnType()).append(" ").append(this.getName()).append("(");
 
         int[] index = new int[]{1,1,1,1,1};
-        if (this.getParameterList().size() != 0) {
-            for (PrimitiveType p : this.getParameterList()) {
+        if (this.getParameterTypes().size() != 0) {
+            for (PrimitiveType p : this.getParameterTypes()) {
                 sb.append(p.getName()).append(" ");
                 switch (p) {
                     case STRING:
@@ -182,7 +184,7 @@ public class MethodPrototype {
         return sb.toString();
     }
 
-    public String constructTestMethod() {
+    public String constructTestMethod2() {
 
         StringBuilder sb = new StringBuilder();
         sb.append("@Test\n");
@@ -209,6 +211,18 @@ public class MethodPrototype {
         return sb.toString();
     }
 
+    public String constructTestMethod() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("@Test\n");
+        sb.append("public void test").append(this.getName()).append("() throws Exception {\n");
+        sb.append("\t//TODO - Automatically generated test\n");
+        sb.append("\texpectedType expected = expectedValue;\n");
+        sb.append("\tactualType = actualValue;\n");
+        sb.append("\tassertEquals(expected, actual);\n");
+        sb.append("}");
+        return sb.toString();
+    }
+
     public String getRaw() {
         return raw;
     }
@@ -225,8 +239,8 @@ public class MethodPrototype {
         return sign;
     }
 
-    public ArrayList<PrimitiveType> getParameterList() {
-        return parameterList;
+    public ArrayList<PrimitiveType> getParameterTypes() {
+        return parameterTypes;
     }
 
 }
@@ -247,5 +261,31 @@ enum PrimitiveType {
 
     public String getName() {
         return name;
+    }
+}
+
+class TypeValuePair {
+    private PrimitiveType type;
+    private String value;
+
+    public TypeValuePair(PrimitiveType type, String value) {
+        this.type = type;
+        this.value = value;
+    }
+
+    public PrimitiveType getType() {
+        return type;
+    }
+
+    public void setType(PrimitiveType type) {
+        this.type = type;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 }

@@ -72,6 +72,14 @@ public class Parser {
         return new MethodPrototype(str);
     }
 
+    /**
+     * Used to identify test method with Test affix
+     * @param name Method name to be tested
+     * */
+    public static boolean isTestMethod(String name) {
+        return name.toLowerCase().matches(".+test");
+    }
+
     private void print(Exception e) {
         System.out.print(e.getCause());
     }

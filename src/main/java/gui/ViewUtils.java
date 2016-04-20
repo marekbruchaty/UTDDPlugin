@@ -10,6 +10,10 @@ import java.awt.*;
 
 public class ViewUtils {
 
+    /**
+     * Returns Point that represents the center of the current window
+     * @param jPanel Currently active JPanel
+     * */
     public static Point getCurrentWindowCenter(JPanel jPanel) {
         GraphicsDevice screen = MouseInfo.getPointerInfo().getDevice();
         Rectangle r = screen.getDefaultConfiguration().getBounds();

@@ -16,11 +16,17 @@ import com.intellij.ui.awt.RelativePoint;
 
 public class PopupCreator {
 
-    public static void createPopup(AnActionEvent e, String str, MessageType messageType) {
-        StatusBar statusBar = WindowManager.getInstance().getStatusBar(DataKeys.PROJECT.getData(e.getDataContext()));
+    /**
+     * Method creates popup notification for current project extracted from AnActionEvent
+     * @param anActionEvent AnActionEvent instance used to get current project
+     * @param text Notification message text
+     * @param messageType Type of message
+     * */
+    public static void createPopup(AnActionEvent anActionEvent, String text, MessageType messageType) {
+        StatusBar statusBar = WindowManager.getInstance().getStatusBar(DataKeys.PROJECT.getData(anActionEvent.getDataContext()));
 
         JBPopupFactory.getInstance()
-                .createHtmlTextBalloonBuilder(str, messageType, null)
+                .createHtmlTextBalloonBuilder(text, messageType, null)
                 .setFadeoutTime(2500)
                 .createBalloon()
                 .show(RelativePoint.getCenterOf(statusBar.getComponent()), Balloon.Position.atLeft);

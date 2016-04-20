@@ -12,7 +12,6 @@ public class TestClassAction extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent e) {
-        // TODO: insert action logic here
 
         Navigatable navigatable = e.getData(CommonDataKeys.NAVIGATABLE);
         String projectPath = e.getData(CommonDataKeys.PROJECT).getBasePath();
@@ -23,10 +22,6 @@ public class TestClassAction extends AnAction {
         } else {
             new ClassGenDialog(directoryPath, projectPath, e);
         }
-
-//        createPopup(e,"", MessageType.INFO);
-//        Messages.showInfoMessage("Something","Haha");
-
     }
 
     @Override

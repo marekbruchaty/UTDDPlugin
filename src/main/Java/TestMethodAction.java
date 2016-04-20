@@ -21,13 +21,13 @@ public class TestMethodAction extends AnAction {
     @Override
     public void actionPerformed(AnActionEvent e) {
         PsiClass psiClass = getPsiClassFromContext(e);
-        new MethodGenDialog(e,psiClass);
+        new MethodGenDialog(e, psiClass);
     }
 
     @Override
     public void update(AnActionEvent e) {
         PsiClass psiClass = getPsiClassFromContext(e);
-        if (psiClass == null) {
+        if (psiClass == null || !Parser.isTestMethod(psiClass.getName())) {
             e.getPresentation().setEnabled(false);
             return;
         }
