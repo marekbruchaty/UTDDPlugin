@@ -2,41 +2,61 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad24fe08-4dd3-4a4d-82fb-b4eae7b6564f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/PsiUtils.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/FileOperations.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/TestMethodAction$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/Utils.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/Java/FileOperations.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/Utils.java" afterPath="$PROJECT_DIR$/src/main/java/FileUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/ClassPair.class" afterPath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/ClassPair.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/MethodPrototype.class" afterPath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/MethodPrototype.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/PluginRegistration.class" afterPath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/PluginRegistration.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/PopupCreator.class" afterPath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/PopupCreator.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/SrcCodeGenerator.class" afterPath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/SrcCodeGenerator.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/TestClassAction.class" afterPath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/TestClassAction.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/TestMethodAction.class" afterPath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/TestMethodAction.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/ClassGenDialog$1.class" afterPath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/ClassGenDialog$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/ClassGenDialog$2.class" afterPath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/ClassGenDialog$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/ClassGenDialog$3.class" afterPath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/ClassGenDialog$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/ClassGenDialog$4.class" afterPath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/ClassGenDialog$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/ClassGenDialog$5.class" afterPath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/ClassGenDialog$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/ClassGenDialog.class" afterPath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/ClassGenDialog.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/MethodGenDialog$1.class" afterPath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/MethodGenDialog$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/MethodGenDialog$2.class" afterPath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/MethodGenDialog$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/MethodGenDialog$3.class" afterPath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/MethodGenDialog$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/MethodGenDialog.class" afterPath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/MethodGenDialog.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/ViewUtils.class" afterPath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/ViewUtils.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/Java/PluginRegistration.java" afterPath="$PROJECT_DIR$/src/main/Java/PluginRegistration.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/Java/TestClassAction.java" afterPath="$PROJECT_DIR$/src/main/Java/TestClassAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/Java/TestMethodAction.java" afterPath="$PROJECT_DIR$/src/main/Java/TestMethodAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ClassPair.java" afterPath="$PROJECT_DIR$/src/main/java/ClassPair.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/MethodPrototype.java" afterPath="$PROJECT_DIR$/src/main/java/MethodPrototype.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/PopupCreator.java" afterPath="$PROJECT_DIR$/src/main/java/PopupCreator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/SrcCodeGenerator.java" afterPath="$PROJECT_DIR$/src/main/java/SrcCodeGenerator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gui/ClassGenDialog.java" afterPath="$PROJECT_DIR$/src/main/java/gui/ClassGenDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gui/MethodGenDialog.java" afterPath="$PROJECT_DIR$/src/main/java/gui/MethodGenDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/gui/ViewUtils.java" afterPath="$PROJECT_DIR$/src/main/java/gui/ViewUtils.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/META-INF/plugin.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/com/intellij/uiDesigner/core/AbstractLayout.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/com/intellij/uiDesigner/core/DimensionInfo.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/com/intellij/uiDesigner/core/GridConstraints.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/com/intellij/uiDesigner/core/GridLayoutManager.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/com/intellij/uiDesigner/core/HorizontalInfo.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/com/intellij/uiDesigner/core/LayoutState.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/com/intellij/uiDesigner/core/Spacer.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/com/intellij/uiDesigner/core/SupportCode$TextWithMnemonic.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/com/intellij/uiDesigner/core/SupportCode.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/com/intellij/uiDesigner/core/Util.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/com/intellij/uiDesigner/core/VerticalInfo.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/icons/tdd.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/liveTemplates/user.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/ClassPair.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/FileUtils.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/MethodPrototype$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/MethodPrototype.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/Parser.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/PluginRegistration.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/PopupCreator.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/PrimitiveType.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/PsiUtils$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/PsiUtils$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/PsiUtils.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/SrcCodeGenerator.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/TestClassAction.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/TestMethodAction.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/ClassGenDialog$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/ClassGenDialog$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/ClassGenDialog$3.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/ClassGenDialog$4.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/ClassGenDialog$5.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/ClassGenDialog.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/MethodGenDialog$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/MethodGenDialog$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/MethodGenDialog$3.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/MethodGenDialog.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/main/Java/gui/ViewUtils.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/test/Java/ParserTest.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/txt_files/MainClassBlueprint.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/txt_files/MethodBlueprint.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/txt_files/TestAssertEqualsBlueprint.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/txt_files/TestAssertFalseBlueprint.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/txt_files/TestAssertNotEqualsBlueprint.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/txt_files/TestAssertTrueBlueprint.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/UTDDPlugin/txt_files/TextClassBlueprint.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/txt_files/MainClassBlueprint.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/txt_files/MethodBlueprint.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/txt_files/TestAssertEqualsBlueprint.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/txt_files/TestAssertFalseBlueprint.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/txt_files/TestAssertNotEqualsBlueprint.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/txt_files/TestAssertTrueBlueprint.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/txt_files/TextClassBlueprint.txt" afterPath="" />
     </list>
     <ignored path="UTDDPlugin.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -71,14 +91,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PsiUtils.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PsiUtils.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/PsiUtils.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="318">
-              <caret line="27" column="105" selection-start-line="27" selection-start-column="105" selection-end-line="27" selection-end-column="105" />
+            <state relative-caret-position="333">
+              <caret line="28" column="42" selection-start-line="28" selection-start-column="42" selection-end-line="28" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/out/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="1" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="1" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -87,16 +117,6 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/gui/ClassGenDialog.form">
           <provider selected="true" editor-type-id="ui-designer">
             <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PsiClass.class" pinned="false" current-in-tab="false">
-        <entry file="jar://$APPLICATION_HOME_DIR$/lib/openapi.jar!/com/intellij/psi/PsiClass.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
-              <folding />
-            </state>
           </provider>
         </entry>
       </file>
@@ -189,7 +209,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/marekbruchaty/UTDDPlugin/GenerateDialog.java" />
         <option value="$PROJECT_DIR$/src/marekbruchaty/UTDDPlugin/GenerateAction.java" />
         <option value="$PROJECT_DIR$/src/main/Java/gui/PathParser.java" />
         <option value="$PROJECT_DIR$/src/test/Java/PathParserTest.java" />
@@ -240,6 +259,7 @@
         <option value="$PROJECT_DIR$/src/main/java/PopupCreator.java" />
         <option value="$PROJECT_DIR$/src/main/java/gui/MethodGenDialog.java" />
         <option value="$PROJECT_DIR$/src/main/java/PsiUtils.java" />
+        <option value="$PROJECT_DIR$/out/.gitignore" />
       </list>
     </option>
   </component>
@@ -290,110 +310,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="UTDDPlugin" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="&lt; IntelliJ IDEA IU-143.1821.5 &gt;" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="UTDDPlugin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="&lt; IntelliJ IDEA IU-143.1821.5 &gt;" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="openapi.jar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="UTDDPlugin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="&lt; IntelliJ IDEA IU-143.1821.5 &gt;" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="openapi.jar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="UTDDPlugin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="&lt; IntelliJ IDEA IU-143.1821.5 &gt;" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="openapi.jar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="intellij" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="UTDDPlugin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="&lt; IntelliJ IDEA IU-143.1821.5 &gt;" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="openapi.jar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="intellij" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="psi" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -533,20 +449,6 @@
               <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="UTDDPlugin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="UTDDPlugin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="META-INF" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
@@ -567,6 +469,34 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="liveTemplates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UTDDPlugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UTDDPlugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UTDDPlugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="UTDDPlugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="out" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1136,7 +1066,7 @@
       <workItem from="1460414266266" duration="3265000" />
       <workItem from="1460805314117" duration="53501000" />
       <workItem from="1460919119435" duration="16203000" />
-      <workItem from="1461158643456" duration="3517000" />
+      <workItem from="1461158643456" duration="5256000" />
     </task>
     <servers />
   </component>
@@ -1173,7 +1103,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="219890000" />
+    <option name="totallyTimeSpent" value="221629000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -1229,14 +1159,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/META-INF/plugin.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/.name">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1350,8 +1272,8 @@
         <state relative-caret-position="95">
           <caret line="1149" column="16" selection-start-line="1149" selection-start-column="16" selection-end-line="1149" selection-end-column="16" />
           <folding>
-            <element signature="e#40355#40356#0" expanded="true" />
-            <element signature="e#40382#40383#0" expanded="true" />
+            <element signature="e#40355#40356#0" expanded="false" />
+            <element signature="e#40382#40383#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1603,11 +1525,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/PsiUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="27" column="105" selection-start-line="27" selection-start-column="105" selection-end-line="27" selection-end-column="105" />
+        <state relative-caret-position="333">
+          <caret line="28" column="42" selection-start-line="28" selection-start-column="42" selection-end-line="28" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="1" selection-start-line="0" selection-start-column="1" selection-end-line="0" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
