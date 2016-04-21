@@ -26,7 +26,7 @@ public class MethodPrototype {
     private void setDefaults() {
         this.name = "";
         this.comparativeSign = "==";
-        this.returnType = new TypeValuePair(VOID,"");
+        this.returnType = new TypeValuePair(VOID,VOID.getName());
         this.parameters = new ArrayList<>();
     }
 
@@ -45,7 +45,7 @@ public class MethodPrototype {
             this.name = parseName(str_split[0]);
             this.parameters = makeParametersList(str_split[1]);
             this.comparativeSign = extractComparativeSign(str_split[2]);
-            this.returnType = extractRetrnTypeValuePair(str_split[2]);
+            this.returnType = extractReturnTypeValuePair(str_split[2]);
         } else throw new Exception("Wrong use of parentheses.");
     }
 
@@ -91,7 +91,7 @@ public class MethodPrototype {
         throw new Exception("Wrong comparative comparativeSign [" + sign + "].");
     }
 
-    private TypeValuePair extractRetrnTypeValuePair(String str) throws Exception {
+    private TypeValuePair extractReturnTypeValuePair(String str) throws Exception {
         str = str.trim();
         if (str.length() < 3) throw new Exception("Wrong return value format. ["+str+"].");
         str = str.substring(2);
@@ -116,7 +116,7 @@ public class MethodPrototype {
     public String constructMethod() {
 
         StringBuilder sb = new StringBuilder();
-        sb.append("public ").append(this.getReturnType()).append(" ").append(this.getName()).append("(");
+        sb.append("public ").append(this.getReturnType().getType().getName()).append(" ").append(this.getName()).append("(");
 
         int[] index = new int[]{1,1,1,1,1};
         if (this.parameters.size() != 0) {
@@ -169,34 +169,44 @@ public class MethodPrototype {
     public String constructTestMethod() {
         StringBuilder sb = new StringBuilder();
         sb.append("@Test\n");
-        sb.append("public void test").append(this.getName()).append("() throws Exception {\n");
+        sb.append("public void test").append(getName()).append("() throws Exception {\n");
         sb.append("\t//TODO - Automatically generated test\n");
+        sb.append("\t").append(getReturnType().getType().getName()).append(" expected = ").append(getReturnType().getValue()).append(";\n");
+        sb.append("\t").append(getReturnType().getType().getName()).append(" actual = ").append(getName()).append("(");
 
-//        switch (this.comparativeSign) {
-//            case "==": {
-//                if (this.extractRetrnTypeValuePair == BOOLEAN) {
-//                    sb.append("assertTrue();");
-//                }
-//                else {
-//                    sb.append("assertEquals(, );");
-//                }
-//            }
-//            break;
-//            case "!=": {
-//                if (this.extractRetrnTypeValuePair == BOOLEAN) {
-//                    sb.append("assertFalse();");
-//                }
-//                else {
-//                    sb.append("assertNotEquals(, );");
-//                }
-//            }
-//            break;
-//        }
+        for (TypeValuePair tvp:getParameters()) {
+            sb.append(tvp.getValue()).append(", ");
+        }
+        if (getParameters().size() != 0) {
+            sb.deleteCharAt(sb.length() - 1);
+            sb.deleteCharAt(sb.length() - 1);
+        }
 
-        sb.append("\texpectedType expected = expectedValue;\n");
-        sb.append("\tactualType = actualValue;\n");
-        sb.append("\tassertEquals(expected, actual);\n");
-        sb.append("}");
+        sb.append(");\n");
+
+
+        switch (this.comparativeSign) {
+            case "==": {
+                if (getReturnType().getType() == BOOLEAN) {
+                    sb.append("assertTrue();");
+                }
+                else {
+                    sb.append("assertEquals(expected, actual);");
+                }
+            }
+            break;
+            case "!=": {
+                if (getReturnType().getType() == BOOLEAN) {
+                    sb.append("assertFalse();");
+                }
+                else {
+                    sb.append("assertNotEquals(expected, actual);");
+                }
+            }
+            break;
+        }
+
+        sb.append("\n}");
         return sb.toString();
     }
 
