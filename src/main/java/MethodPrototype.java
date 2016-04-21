@@ -31,10 +31,8 @@ public class MethodPrototype {
     }
 
     private void processString(String str) throws Exception {
-        str = str.replaceAll("\\s+", " ");
-        if (str.length() == 0 || str.matches(" ")) throw new Exception("No method prototype.");
-        if (str.startsWith(" ")) str = str.substring(1);
-        if (str.endsWith(" ")) str = str.substring(0,str.length()-1);
+        str = str.replaceAll("\\s+", " ").trim();
+        if (str.isEmpty()) throw new Exception("No method prototype.");
         validate(str);
 
         String[] str_split = str.split("\\(|\\)");

@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad24fe08-4dd3-4a4d-82fb-b4eae7b6564f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/PrimitiveType.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/TypeValuePair.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/MethodPrototypeTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/MethodPrototype.java" afterPath="$PROJECT_DIR$/src/main/java/MethodPrototype.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/MethodPrototypeTest.java" afterPath="$PROJECT_DIR$/src/test/java/MethodPrototypeTest.java" />
     </list>
     <ignored path="UTDDPlugin.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -75,8 +72,8 @@
       <file leaf-file-name="MethodPrototype.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/MethodPrototype.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-45">
-              <caret line="87" column="29" selection-start-line="87" selection-start-column="29" selection-end-line="87" selection-end-column="29" />
+            <state relative-caret-position="270">
+              <caret line="45" column="63" selection-start-line="45" selection-start-column="63" selection-end-line="45" selection-end-column="63" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -107,8 +104,8 @@
       <file leaf-file-name="MethodPrototypeTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/MethodPrototypeTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="337">
-              <caret line="250" column="37" selection-start-line="250" selection-start-column="37" selection-end-line="250" selection-end-column="37" />
+            <state relative-caret-position="367">
+              <caret line="274" column="31" selection-start-line="274" selection-start-column="31" selection-end-line="274" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -1041,44 +1038,44 @@
       <workItem from="1460805314117" duration="53501000" />
       <workItem from="1460919119435" duration="16203000" />
       <workItem from="1461158643456" duration="22428000" />
-      <workItem from="1461191976057" duration="1583000" />
+      <workItem from="1461191976057" duration="3602000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="MethodPrototypeTest - 2016.04.21 at 00h 53m 38s.xml">
-      <configuration name="MethodPrototypeTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MethodPrototypeTest - 2016.04.21 at 00h 56m 24s.xml">
-      <configuration name="MethodPrototypeTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MethodPrototypeTest - 2016.04.21 at 00h 56m 53s.xml">
-      <configuration name="MethodPrototypeTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MethodPrototypeTest - 2016.04.21 at 00h 57m 36s.xml">
-      <configuration name="MethodPrototypeTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MethodPrototypeTest - 2016.04.21 at 00h 58m 54s.xml">
-      <configuration name="MethodPrototypeTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MethodPrototypeTest - 2016.04.21 at 00h 59m 04s.xml">
-      <configuration name="MethodPrototypeTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MethodPrototypeTest - 2016.04.21 at 01h 00m 26s.xml">
-      <configuration name="MethodPrototypeTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="MethodPrototypeTest - 2016.04.21 at 01h 03m 25s.xml">
-      <configuration name="MethodPrototypeTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="MethodPrototypeTest - 2016.04.21 at 01h 04m 06s.xml">
       <configuration name="MethodPrototypeTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="MethodPrototypeTest_testInvalidParametersAllEmpty - 2016.04.21 at 00h 57m 05s.xml">
-      <configuration name="MethodPrototypeTest.testInvalidParametersAllEmpty" configurationId="JUnit" />
+    <history-entry file="MethodPrototypeTest - 2016.04.21 at 01h 37m 14s.xml">
+      <configuration name="MethodPrototypeTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MethodPrototypeTest - 2016.04.21 at 01h 37m 28s.xml">
+      <configuration name="MethodPrototypeTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MethodPrototypeTest - 2016.04.21 at 01h 37m 46s.xml">
+      <configuration name="MethodPrototypeTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MethodPrototypeTest - 2016.04.21 at 01h 37m 59s.xml">
+      <configuration name="MethodPrototypeTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MethodPrototypeTest - 2016.04.21 at 01h 38m 55s.xml">
+      <configuration name="MethodPrototypeTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MethodPrototypeTest - 2016.04.21 at 01h 39m 45s.xml">
+      <configuration name="MethodPrototypeTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MethodPrototypeTest - 2016.04.21 at 01h 45m 47s.xml">
+      <configuration name="MethodPrototypeTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MethodPrototypeTest - 2016.04.21 at 01h 46m 17s.xml">
+      <configuration name="MethodPrototypeTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="MethodPrototypeTest - 2016.04.21 at 01h 47m 41s.xml">
+      <configuration name="MethodPrototypeTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="240384000" />
+    <option name="totallyTimeSpent" value="242403000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -1399,24 +1396,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/PrimitiveType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gui/MethodGenDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="85" column="52" selection-start-line="85" selection-start-column="52" selection-end-line="85" selection-end-column="52" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/gui/ClassGenDialog.form">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1438,13 +1417,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/MethodPrototype.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/ParserTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-45">
-          <caret line="87" column="29" selection-start-line="87" selection-start-column="29" selection-end-line="87" selection-end-column="29" />
+        <state relative-caret-position="352">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gui/MethodGenDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="85" column="52" selection-start-line="85" selection-start-column="52" selection-end-line="85" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/PrimitiveType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1456,10 +1453,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/ParserTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/MethodPrototype.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+        <state relative-caret-position="270">
+          <caret line="45" column="63" selection-start-line="45" selection-start-column="63" selection-end-line="45" selection-end-column="63" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1468,8 +1465,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/MethodPrototypeTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="250" column="37" selection-start-line="250" selection-start-column="37" selection-end-line="250" selection-end-column="37" />
+        <state relative-caret-position="367">
+          <caret line="274" column="31" selection-start-line="274" selection-start-column="31" selection-end-line="274" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

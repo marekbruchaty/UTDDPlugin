@@ -163,6 +163,18 @@ public class MethodPrototypeTest {
         assertEquals(PrimitiveType.VOID, mp.getReturnType().getType());
     }
 
+    @Test
+    public void testMethodReturnValueLongText() throws Exception {
+        MethodPrototype mp = new MethodPrototype("method() == \"This is just a sample text used as a return value.\"");
+        assertEquals("\"This is just a sample text used as a return value.\"", mp.getReturnType().getValue());
+    }
+
+    @Test
+    public void testMethodReturnValueLongTextWithQuotes() throws Exception {
+        MethodPrototype mp = new MethodPrototype("method() == \"String can contain \"quotes\" too.\"");
+        assertEquals("\"String can contain \"quotes\" too.\"", mp.getReturnType().getValue());
+    }
+
     //Not valid name
 
     @Test
@@ -178,6 +190,11 @@ public class MethodPrototypeTest {
     @Test
     public void testInvalidNameSpace() throws Exception {
         assertFalse(isValid("met hod()"));
+    }
+
+    @Test
+    public void testInvalidNameBlank() throws Exception {
+        assertFalse(isValid("      ()"));
     }
 
     //Not valid comparative sign
@@ -246,6 +263,11 @@ public class MethodPrototypeTest {
         assertTrue(isValid("_1_2_3()"));
     }
 
+    /**
+     * Method is used for catching Exceptions thrown during the processing of the provided method prototype.
+     * It returns TRUE if no exceptions were thrown or FALSE if it catches an exception.
+     * @param str Input prototype defined in plain text.
+     * */
     private boolean isValid(String str) {
         try {
             new MethodPrototype(str);
