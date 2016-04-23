@@ -3,10 +3,10 @@ package main.java;
 public enum PrimitiveType {
     STRING("String"),
     INT("int"),
-    FLOAT("float"),
+    DOUBLE("double"),
     BOOLEAN("boolean"),
     CHAR("char"),
-    OBJECT("object"),
+    OBJECT("Object"),
     VOID("void");
 
     private String name;

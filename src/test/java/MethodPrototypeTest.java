@@ -81,11 +81,11 @@ public class MethodPrototypeTest {
     public void testMethodParametersFloat() throws Exception {
         MethodPrototype mp = new MethodPrototype("method(1.2345, 2., 0.0)");
         ArrayList<TypeValuePair> parameters = mp.getParameters();
-        assertEquals(PrimitiveType.FLOAT, parameters.get(0).getType());
+        assertEquals(PrimitiveType.DOUBLE, parameters.get(0).getType());
         assertEquals("1.2345", parameters.get(0).getValue());
-        assertEquals(PrimitiveType.FLOAT, parameters.get(1).getType());
+        assertEquals(PrimitiveType.DOUBLE, parameters.get(1).getType());
         assertEquals("2.", parameters.get(1).getValue());
-        assertEquals(PrimitiveType.FLOAT, parameters.get(2).getType());
+        assertEquals(PrimitiveType.DOUBLE, parameters.get(2).getType());
         assertEquals("0.0", parameters.get(2).getValue());
     }
 
@@ -136,7 +136,7 @@ public class MethodPrototypeTest {
     @Test
     public void testMethodReturnTypeFloat() throws Exception {
         MethodPrototype mp = new MethodPrototype("method() == 0.0");
-        assertEquals(PrimitiveType.FLOAT, mp.getReturnType().getType());
+        assertEquals(PrimitiveType.DOUBLE, mp.getReturnType().getType());
     }
 
     @Test
@@ -263,6 +263,11 @@ public class MethodPrototypeTest {
         assertTrue(isValid("_1_2_3()"));
     }
 
+    @Test
+    public void testInvalidNoPrototype() throws Exception {
+        assertFalse(isValid("                "));
+    }
+
     /**
      * Method is used for catching Exceptions thrown during the processing of the provided method prototype.
      * It returns TRUE if no exceptions were thrown or FALSE if it catches an exception.
@@ -270,7 +275,7 @@ public class MethodPrototypeTest {
      * */
     private boolean isValid(String str) {
         try {
-            new MethodPrototype(str);
+            MethodPrototype mp = new MethodPrototype(str);
             return true;
         } catch (Exception e) {
             return false;

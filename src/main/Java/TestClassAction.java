@@ -26,10 +26,10 @@ public class TestClassAction extends AnAction {
 
     @Override
     public void update(AnActionEvent e) {
-        e.getPresentation().setEnabled(navigatableIsDirectory(e));
+        e.getPresentation().setEnabled(navigableIsDirectory(e));
     }
 
-    private boolean navigatableIsDirectory(AnActionEvent e) {
+    private boolean navigableIsDirectory(AnActionEvent e) {
         final Project project = e.getData(CommonDataKeys.PROJECT);
         final Navigatable navigatable = e.getData(CommonDataKeys.NAVIGATABLE);
         if (project == null || navigatable == null) {

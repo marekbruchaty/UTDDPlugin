@@ -1,5 +1,7 @@
 package main.java;
 
+import com.intellij.psi.PsiClass;
+
 import java.util.ArrayList;
 
 import static main.java.PrimitiveType.*;
@@ -16,11 +18,10 @@ public class MethodPrototype {
     private TypeValuePair returnType;
     private ArrayList<TypeValuePair> parameters;
 
-
-    public MethodPrototype(String str) throws Exception {
-        raw = str;
+    public MethodPrototype(String prototype) throws Exception {
+        raw = prototype;
         setDefaults();
-        processString(str);
+        processString(prototype);
     }
 
     private void setDefaults() {
@@ -105,7 +106,7 @@ public class MethodPrototype {
         if (str.matches("\".*\"")) pt = STRING;
         else if (str.matches("\'.\'")) pt = CHAR;
         else if (str.matches("[0-9]+")) pt = INT;
-        else if (str.matches("[0-9]+\\.[0-9]*")) pt = FLOAT;
+        else if (str.matches("[0-9]+\\.[0-9]*")) pt = DOUBLE;
         else if (str.matches("true") || str.matches("false")) pt = BOOLEAN;
         else if (str.matches("void")) pt = VOID;
         else if (str.matches("[_a-zA-Z]+[_a-zA-Z0-9]*")) pt = OBJECT;
@@ -118,95 +119,85 @@ public class MethodPrototype {
         StringBuilder sb = new StringBuilder();
         sb.append("public ").append(this.getReturnType().getType().getName()).append(" ").append(this.getName()).append("(");
 
-        int[] index = new int[]{1,1,1,1,1};
-        if (this.parameters.size() != 0) {
+        int[] index = new int[]{1,1,1,1,1,1};
+        if (getParameters().size() != 0) {
             for (TypeValuePair p : this.parameters) {
                 sb.append(p.getType().getName()).append(" ");
                 switch (p.getType()) {
-                    case STRING:
-                        sb.append(STRING.getName()).append(index[0]++);
-                        break;
-                    case INT:
-                        sb.append(INT.getName()).append(index[1]++);
-                        break;
-                    case FLOAT:
-                        sb.append(FLOAT.getName()).append(index[2]++);
-                        break;
-                    case BOOLEAN:
-                        sb.append(BOOLEAN.getName()).append(index[3]++);
-                        break;
-                    case OBJECT:
-                        sb.append(OBJECT.getName()).append(index[4]++);
-                        break;
+                    case STRING: sb.append(STRING.getName()).append(index[0]++); break;
+                    case INT: sb.append(INT.getName()).append(index[1]++); break;
+                    case DOUBLE: sb.append(DOUBLE.getName()).append(index[2]++); break;
+                    case BOOLEAN: sb.append(BOOLEAN.getName()).append(index[3]++); break;
+                    case CHAR: sb.append(CHAR.getName()).append(index[3]++); break;
+                    case OBJECT: sb.append(OBJECT.getName()).append(index[4]++); break;
                 }
                 sb.append(", ");
             }
-            sb.deleteCharAt(sb.length() - 1);
-            sb.deleteCharAt(sb.length() - 1);
+            sb.delete(sb.length()-2,sb.length());
         }
 
         sb.append(") {\n");
-        sb.append("\t//TODO - Automatically generated method\n\n");
+        sb.append("\t//TODO - Automatically generated method\n");
         switch (this.returnType.getType()) {
-            case STRING: sb.append("return \"\";");
-                break;
-            case INT: sb.append("return 0;");
-                break;
-            case FLOAT: sb.append("return 0.0;");
-                break;
-            case BOOLEAN: sb.append("return false;");
-                break;
-            case OBJECT: sb.append("return void;");
-                break;
-            case VOID:
-                break;
+            case STRING: sb.append("return \"\";"); break;
+            case INT: sb.append("return 0;"); break;
+            case DOUBLE: sb.append("return 0.0;"); break;
+            case BOOLEAN: sb.append("return false;"); break;
+            case CHAR: sb.append("return '';"); break;
+            case OBJECT: sb.append("return void;"); break;
+            case VOID: break;
         }
         sb.append("\n}");
 
         return sb.toString();
     }
 
-    public String constructTestMethod() {
+    public String constructTestMethod(PsiClass psiClass) {
         StringBuilder sb = new StringBuilder();
         sb.append("@Test\n");
         sb.append("public void test").append(getName()).append("() throws Exception {\n");
         sb.append("\t//TODO - Automatically generated test\n");
-        sb.append("\t").append(getReturnType().getType().getName()).append(" expected = ").append(getReturnType().getValue()).append(";\n");
-        sb.append("\t").append(getReturnType().getType().getName()).append(" actual = ").append(getName()).append("(");
 
-        for (TypeValuePair tvp:getParameters()) {
-            sb.append(tvp.getValue()).append(", ");
-        }
-        if (getParameters().size() != 0) {
-            sb.deleteCharAt(sb.length() - 1);
-            sb.deleteCharAt(sb.length() - 1);
-        }
-
-        sb.append(");\n");
-
-
-        switch (this.comparativeSign) {
-            case "==": {
-                if (getReturnType().getType() == BOOLEAN) {
-                    sb.append("assertTrue();");
-                }
-                else {
-                    sb.append("assertEquals(expected, actual);");
-                }
+        PrimitiveType retType = getReturnType().getType();
+        if (retType == PrimitiveType.BOOLEAN) {
+            createMethodBody(psiClass, retType, false);
+            if (getComparativeSign().equalsIgnoreCase("==")) {
+                if (getReturnType().getValue().equalsIgnoreCase("true")) sb.append("assertTrue(actual);");
+                else sb.append("assertFalse(actual);");
+            } else {
+                if (getReturnType().getValue().equalsIgnoreCase("true")) sb.append("assertFalse(actual);");
+                else sb.append("assertTrue(actual);");
             }
-            break;
-            case "!=": {
-                if (getReturnType().getType() == BOOLEAN) {
-                    sb.append("assertFalse();");
-                }
-                else {
-                    sb.append("assertNotEquals(expected, actual);");
-                }
-            }
-            break;
+        } else {
+            createMethodBody(psiClass, retType, true);
+            if (getComparativeSign().equalsIgnoreCase("==")) sb.append("assertEquals(expected, actual);");
+            else sb.append("assertNotEquals(expected, actual);");
         }
 
         sb.append("\n}");
+        return sb.toString();
+    }
+
+    private String createMethodBody(PsiClass psiClass, PrimitiveType retType, boolean addExpectVariable) {
+        String baseClass = psiClass.getName().substring(0, psiClass.getName().length() - "Test".length());
+        String baseObject = baseClass.substring(0,1).toLowerCase() + baseClass.substring(1);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("\t").append(baseClass).append(" ").append(baseClass.toLowerCase());
+        sb.append(" = new ").append(baseClass).append("(").append(");\n");
+
+        if (addExpectVariable) {
+            sb.append("\t").append(retType == VOID ? PrimitiveType.OBJECT.getName() : retType.getName());
+            sb.append(" expected = ").append(getReturnType().getValue()).append(";\n");
+        }
+
+        sb.append("\t").append(retType == VOID ? PrimitiveType.OBJECT.getName(): retType.getName());
+        sb.append(" actual = ").append(baseObject).append(".").append(getName()).append("(");
+
+        for (TypeValuePair tvp:getParameters()) sb.append(tvp.getValue()).append(", ");
+        if (getParameters().size() != 0) sb.delete(sb.length() - 2,sb.length());
+
+        sb.append(");\n");
         return sb.toString();
     }
 

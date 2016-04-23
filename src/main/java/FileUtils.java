@@ -46,9 +46,10 @@ public class FileUtils {
     /**
      * Returns true if file was created successfully, false otherwise
      * */
-    public static boolean createFile(File file, String content) throws IOException {
-        if (file.getParent() != null)
-            file.getParentFile().mkdirs();
+    public static boolean createFile(File file, String content) throws Exception {
+        if (file.exists()) throw new Exception("File "+ file.getName() + " already exists");
+        if (file.getParent() != null) file.getParentFile().mkdirs();
+
         try {
             file.createNewFile();
             FileWriter fw = new FileWriter(file.getAbsoluteFile());

@@ -22,6 +22,8 @@ public class TestMethodAction extends AnAction {
     public void actionPerformed(AnActionEvent e) {
         PsiClass psiClass = getPsiClassFromContext(e);
         new MethodGenDialog(e, psiClass);
+
+
     }
 
     @Override

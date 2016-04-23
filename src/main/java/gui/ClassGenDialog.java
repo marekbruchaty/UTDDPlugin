@@ -32,14 +32,8 @@ public class ClassGenDialog extends JDialog {
 
         buttonGenerate.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                try {
-                    FileUtils.createFile(classPair.getTestClass(),classPair.getTestClassBody());
-                    FileUtils.createFile(classPair.getMainClass(),classPair.getMainClassBody());
-                    PopupCreator.createPopup(actionEvent,classPair.getTestClass().getName() +
-                            " and " + classPair.getMainClass().getName() + " created successfully.", MessageType.INFO);
-                } catch (IOException ioe) {
-                    PopupCreator.createPopup(actionEvent,ioe.getMessage(), MessageType.ERROR);
-                }
+                createFile(actionEvent,classPair.getTestClass(),classPair.getTestClassBody());
+                createFile(actionEvent,classPair.getMainClass(),classPair.getMainClassBody());
                 actionEvent.getData(CommonDataKeys.PROJECT).getBaseDir().refresh(false,true);
                 dispose();
             }
@@ -118,6 +112,7 @@ public class ClassGenDialog extends JDialog {
         setTitle("New pair");
         setLocation(ViewUtils.getCurrentWindowCenter(contentPane));
         setContentPane(contentPane);
+        getRootPane().setDefaultButton(buttonGenerate);
         Dimension dimension = new Dimension(500,400);
         setSize(dimension);
         setMinimumSize(dimension);
@@ -128,6 +123,16 @@ public class ClassGenDialog extends JDialog {
         testName.setText("");
         classPath.setText(classPair.getMainDirectory().toString());
         className.setText("");
+    }
+
+    public void createFile(AnActionEvent actionEvent, File classFile, String classBody) {
+        try {
+            FileUtils.createFile(classFile,classBody);
+            PopupCreator.createPopup(actionEvent,classPair.getTestClass().getName() +
+                    " and " + classPair.getMainClass().getName() + " created successfully.", MessageType.INFO);
+        } catch (Exception ex) {
+            PopupCreator.createPopup(actionEvent,ex.getMessage(), MessageType.ERROR);
+        }
     }
 
 //    private String directoryChooser() {
