@@ -34,22 +34,17 @@ public class MethodGenDialog extends JDialog{
 
         cancelButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-
-                dispose();
-            }
+            public void actionPerformed(ActionEvent e) {dispose();}
         });
 
         generateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 try {
                     PsiUtils.writeMethodsToFiles(psiClass,methodPrototype);
                 } catch (Exception ex) {
                     PopupCreator.createPopup(actionEvent,ex.getMessage(),MessageType.ERROR);
                 }
-
                 dispose();
             }
         });
@@ -74,5 +69,6 @@ public class MethodGenDialog extends JDialog{
             }
         });
     }
+
 }
 

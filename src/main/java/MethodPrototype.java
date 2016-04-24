@@ -1,9 +1,7 @@
 package main.java;
 
 import com.intellij.psi.PsiClass;
-
 import java.util.ArrayList;
-
 import static main.java.PrimitiveType.*;
 
 /**
@@ -66,11 +64,11 @@ public class MethodPrototype {
 
     private ArrayList<TypeValuePair> makeParametersList(String str) throws Exception {
         ArrayList<TypeValuePair> parameters = new ArrayList<>();
-
-        str = str.replaceAll("\\s+", "");
+        str = str.trim();
         if (str.length() == 0) return parameters;
         if (str.contains(",,")) throw new Exception("Empty parameter.");
         for (String s: str.split(",")) {
+            s = s.trim();
             if (s.isEmpty()) throw new Exception("Empty parameter.");
             parameters.add(extractTypeValuePair(s));
         }
@@ -124,12 +122,12 @@ public class MethodPrototype {
             for (TypeValuePair p : this.parameters) {
                 sb.append(p.getType().getName()).append(" ");
                 switch (p.getType()) {
-                    case STRING: sb.append(STRING.getName()).append(index[0]++); break;
+                    case STRING: sb.append(STRING.getName().toLowerCase()).append(index[0]++); break;
                     case INT: sb.append(INT.getName()).append(index[1]++); break;
                     case DOUBLE: sb.append(DOUBLE.getName()).append(index[2]++); break;
                     case BOOLEAN: sb.append(BOOLEAN.getName()).append(index[3]++); break;
                     case CHAR: sb.append(CHAR.getName()).append(index[3]++); break;
-                    case OBJECT: sb.append(OBJECT.getName()).append(index[4]++); break;
+                    case OBJECT: sb.append(OBJECT.getName().toLowerCase()).append(index[4]++); break;
                 }
                 sb.append(", ");
             }
@@ -160,7 +158,7 @@ public class MethodPrototype {
 
         PrimitiveType retType = getReturnType().getType();
         if (retType == PrimitiveType.BOOLEAN) {
-            createMethodBody(psiClass, retType, false);
+            sb.append(createMethodBody(psiClass, retType, false));
             if (getComparativeSign().equalsIgnoreCase("==")) {
                 if (getReturnType().getValue().equalsIgnoreCase("true")) sb.append("assertTrue(actual);");
                 else sb.append("assertFalse(actual);");
@@ -169,7 +167,7 @@ public class MethodPrototype {
                 else sb.append("assertTrue(actual);");
             }
         } else {
-            createMethodBody(psiClass, retType, true);
+            sb.append(createMethodBody(psiClass, retType, true));
             if (getComparativeSign().equalsIgnoreCase("==")) sb.append("assertEquals(expected, actual);");
             else sb.append("assertNotEquals(expected, actual);");
         }
@@ -188,7 +186,7 @@ public class MethodPrototype {
 
         if (addExpectVariable) {
             sb.append("\t").append(retType == VOID ? PrimitiveType.OBJECT.getName() : retType.getName());
-            sb.append(" expected = ").append(getReturnType().getValue()).append(";\n");
+            sb.append(" expected = ").append(retType == VOID ? "null" : getReturnType().getValue()).append(";\n");
         }
 
         sb.append("\t").append(retType == VOID ? PrimitiveType.OBJECT.getName(): retType.getName());

@@ -4,14 +4,13 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.ui.MessageType;
 import main.java.ClassPair;
-import main.java.PopupCreator;
 import main.java.FileUtils;
+import main.java.PopupCreator;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
-import java.io.IOException;
 
 public class ClassGenDialog extends JDialog {
     private JPanel contentPane;
@@ -39,7 +38,6 @@ public class ClassGenDialog extends JDialog {
             }
         });
 
-
         testName.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
@@ -57,7 +55,6 @@ public class ClassGenDialog extends JDialog {
                         signalBadFormat(ex.getMessage());
                     }
                 }
-
             }
         });
 
@@ -135,16 +132,4 @@ public class ClassGenDialog extends JDialog {
         }
     }
 
-//    private String directoryChooser() {
-//        JFileChooser fileChooser = new JFileChooser();
-//        fileChooser.setCurrentDirectory(classPair.getMainDirectory().toFile());
-//        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-//        int result = fileChooser.showOpenDialog(fileChooser);
-//        if (result == JFileChooser.APPROVE_OPTION) {
-//            File selectedFile = fileChooser.getSelectedFile();
-//            System.out.println("Selected file: " + selectedFile.getAbsolutePath());
-//            return selectedFile.getAbsolutePath();
-//        }
-//        return null;
-//    }
 }
