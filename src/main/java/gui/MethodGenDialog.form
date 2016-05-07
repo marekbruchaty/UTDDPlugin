@@ -34,7 +34,7 @@
           <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Method prototype:"/>
+          <text value="New Test Case Statement:"/>
         </properties>
       </component>
       <component id="35269" class="javax.swing.JTextField" binding="methodPrototypeTextField">
@@ -50,7 +50,7 @@
           <grid row="2" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Main method preview:"/>
+          <text value="Production Method Preview:"/>
         </properties>
       </component>
       <component id="7f8cc" class="javax.swing.JLabel">
@@ -58,7 +58,7 @@
           <grid row="4" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Test method preview:"/>
+          <text value="Test Method Preview:"/>
         </properties>
       </component>
       <scrollpane id="9ec71">
@@ -71,6 +71,7 @@
           <component id="5b2be" class="javax.swing.JTextPane" binding="testMethodPreview">
             <constraints/>
             <properties>
+              <editable value="false"/>
               <font name="Courier New" style="1"/>
               <text value=""/>
             </properties>

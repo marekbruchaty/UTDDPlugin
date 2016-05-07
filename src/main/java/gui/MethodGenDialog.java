@@ -22,15 +22,19 @@ public class MethodGenDialog extends JDialog{
     private JTextPane testMethodPreview;
     private MethodPrototype methodPrototype;
 
+    private static final String title = "New test/production method pair";
+    private Color defForegroundColor;
+
     public MethodGenDialog(AnActionEvent actionEvent, PsiClass psiClass) {
         setVisible(true);
-        setTitle("New method pair");
+        setTitle(title);
         setLocation(ViewUtils.getCurrentWindowCenter(contentPane));
         getRootPane().setDefaultButton(generateButton);
         setContentPane(contentPane);
         Dimension dimension = new Dimension(500,400);
         setSize(dimension);
         setMinimumSize(dimension);
+        defForegroundColor = methodPrototypeTextField.getForeground();
 
         cancelButton.addActionListener(new ActionListener() {
             @Override
@@ -55,7 +59,7 @@ public class MethodGenDialog extends JDialog{
                 super.keyReleased(e);
                 String text = methodPrototypeTextField.getText();
                 try {
-                    methodPrototypeTextField.setForeground(Color.LIGHT_GRAY);
+                    methodPrototypeTextField.setForeground(defForegroundColor);
                     methodPrototype = new MethodPrototype(text);
                     methodPreview.setText(methodPrototype.constructMethod());
                     testMethodPreview.setText(methodPrototype.constructTestMethod(psiClass));

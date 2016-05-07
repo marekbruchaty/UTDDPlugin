@@ -23,10 +23,13 @@ public class ClassGenDialog extends JDialog {
     private JTextPane previewPane;
 
     private ClassPair classPair;
+    private static final String title = "New test/production class pair";
+    private Color defForegroundColor;
 
     public ClassGenDialog(String testDir, String projectDir, AnActionEvent actionEvent) {
         initDialog();
         createClassPair(testDir, projectDir);
+        defForegroundColor = testName.getForeground();
         initFields();
 
         buttonGenerate.addActionListener(new ActionListener() {
@@ -97,8 +100,8 @@ public class ClassGenDialog extends JDialog {
     }
 
     private void signalReady(String preview) {
-        testName.setForeground(Color.LIGHT_GRAY);
-        className.setForeground(Color.LIGHT_GRAY);
+        testName.setForeground(defForegroundColor);
+        className.setForeground(defForegroundColor);
         previewPane.setText(preview);
         className.setText(classPair.getMainClass().getName().replace(".java",""));
         buttonGenerate.setEnabled(true);
@@ -106,7 +109,7 @@ public class ClassGenDialog extends JDialog {
 
     private void initDialog() {
         setVisible(true);
-        setTitle("New pair");
+        setTitle(title);
         setLocation(ViewUtils.getCurrentWindowCenter(contentPane));
         setContentPane(contentPane);
         getRootPane().setDefaultButton(buttonGenerate);

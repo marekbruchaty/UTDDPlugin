@@ -13,7 +13,7 @@
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Main class name:"/>
+          <text value="Production Class Name:"/>
         </properties>
       </component>
       <component id="8b4a4" class="javax.swing.JLabel">
@@ -21,7 +21,7 @@
           <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Main class directory:"/>
+          <text value="Production Class Directory:"/>
         </properties>
       </component>
       <component id="334bc" class="javax.swing.JTextField" binding="classPath" default-binding="true">
@@ -92,7 +92,7 @@
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Test class name:"/>
+          <text value="Test Class Name:"/>
         </properties>
       </component>
       <component id="e3568" class="javax.swing.JTextField" binding="testPath" default-binding="true">
@@ -111,7 +111,7 @@
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Test class directory:"/>
+          <text value="Test Class Directory:"/>
         </properties>
       </component>
       <component id="120e" class="javax.swing.JTextField" binding="testName" default-binding="true">
