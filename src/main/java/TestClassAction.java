@@ -17,7 +17,8 @@ public class TestClassAction extends AnAction {
         String projectPath = e.getData(CommonDataKeys.PROJECT).getBasePath();
         String directoryPath = navigatable.toString().replaceAll("^PsiDirectory:","");
 
-        if (!directoryPath.toLowerCase().contains("/test")) {
+        String slash = System.getProperty("os.name").toLowerCase().contains("windows") ? "\\" : "/";
+        if (!directoryPath.toLowerCase().contains(slash+"test")) {
             PopupCreator.createPopup(e,"No TEST parent directory found.", MessageType.WARNING);
         } else {
             new ClassGenDialog(directoryPath, projectPath, e);

@@ -108,7 +108,7 @@ public class MethodPrototype {
         else if (str.matches("true") || str.matches("false")) pt = BOOLEAN;
         else if (str.matches("void")) pt = VOID;
         else if (str.matches("[_a-zA-Z]+[_a-zA-Z0-9]*")) pt = OBJECT;
-        else throw new Exception("Wrong return value format. ["+str+"].");
+        else throw new Exception("Invalid value format. ["+str+"].");
         return new TypeValuePair(pt,str);
     }
 

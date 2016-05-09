@@ -1,5 +1,6 @@
 package main.java;
 
+import java.awt.*;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -66,19 +67,13 @@ public class FileUtils {
             return false;
         }
     }
-
+    
     public static Path swapDirectory(Path projectDirectory, Path path, String from, String to) {
-        String shortPath = path.toString().replace(projectDirectory.toString(),"");
-        StringBuilder sb = new StringBuilder();
-        Iterator<Path> pathIterator = Paths.get("/" + shortPath).iterator();
-        sb.append(projectDirectory).append("/");
-        while (pathIterator.hasNext()) {
-            Path p = pathIterator.next();
-            if (p.toString().toLowerCase().compareTo(from.toLowerCase())==0) sb.append(to);
-            else sb.append(p.toString());
-            sb.append("/");
-        }
-        return Paths.get(sb.toString());
+        String slash = path.toString().matches("[a-zA-Z]:.*") ? "\\" : "/";
+        String shortenPath = path.toString().substring(projectDirectory.toString().length()) + slash;
+        shortenPath = shortenPath.replace(slash+from+slash,slash+to+slash);
+        String swap = projectDirectory.toString() + shortenPath.substring(0, shortenPath.length() - 1);
+        return Paths.get(swap);
     }
 
 }

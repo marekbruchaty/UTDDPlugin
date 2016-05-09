@@ -134,9 +134,9 @@ public class PsiUtils {
     }
 
     /**
-     * Method for adding PsiMethod to PsiClass created from string
-     * @param psiClass Method is added to this PsiClass
-     * @param newMethod Method prototype containing info about methods to add
+     * Method for adding PsiMethod to PsiClass.
+     * @param psiClass  The PsiMethod is added to this PsiClass
+     * @param newMethod String representation of the method. PsiMethod would be created first.
      * */
     private static void addMethodToPsiClass(PsiClass psiClass, String newMethod) throws Exception {
         PsiElementFactory elementFactory = JavaPsiFacade.getElementFactory(psiClass.getProject());
@@ -150,7 +150,6 @@ public class PsiUtils {
             protected void run() throws Throwable {
                 PsiElement psiElement = psiClass.add(method);
                 JavaCodeStyleManager.getInstance(psiClass.getProject()).shortenClassReferences(psiElement);
-
             }
         }.execute();
     }
