@@ -66,7 +66,8 @@ public class ClassPair {
 
     private String getPackage(Path path, Path projectPath) {
         String s = path.toString().replace(projectPath.toString(), "");
-        return s.substring(s.indexOf("/",1)+1).replace("/",".");
+        String slash = System.getProperty("os.name").toLowerCase().contains("windows") ? "\\" : "/";
+        return s.substring(s.indexOf(slash,1)+1).replace(slash,".");
     }
 
     public Path getMainDirectory() {

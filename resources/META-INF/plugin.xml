@@ -1,11 +1,12 @@
 <idea-plugin version="2">
-  <id>marekbruchaty.UTDDPlugin</id>
-  <name>UTDD Plugin</name>
+  <id>marekbruchaty.TPCMG</id>
+  <name>Test/Production Class and Method Generator</name>
   <version>1.0</version>
-  <vendor email="marekbruchaty@gmail.com" url="http://www.stuba.sk">YourCompany</vendor>
+  <vendor email="marekbruchaty@gmail.com" url="">-</vendor>
 
   <description><![CDATA[
-      This plugin is intended to be used for creation and execution of unit tests when using test driven development.<br>
+      This plugin is used to generate test and production classes, as well as test and production methods from a single action.
+      It is primarily intended for use in Test Driven Development, to speed up the implementation of test cases.<br>
       <em>most HTML tags may be used</em>
     ]]></description>
 
