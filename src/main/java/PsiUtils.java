@@ -96,6 +96,13 @@ public class PsiUtils {
         while (importIterator.hasNext()) {
             if (importIterator.next().equalsIgnoreCase(importStatement)) return true;
         }
+
+        Stream<String> staticImportStream = Arrays.stream(importList.getImportStaticStatements()).map(x -> x.getReferenceName());
+        Iterator<String> staticImportIterator = staticImportStream.iterator();
+        while (staticImportIterator.hasNext()) {
+            if (staticImportIterator.next().equalsIgnoreCase(importStatement)) return true;
+        }
+
         return false;
     }
 
@@ -113,8 +120,26 @@ public class PsiUtils {
 
             if (psiClasses.length > 1) throw new Exception("Unable to find main class. More than one class found.");
 
-            addMethodToPsiClass(psiClass, methodPrototype.constructTestMethod(psiClass));
-            addMethodToPsiClass(psiClasses[0], methodPrototype.constructMethod());
+            String testMethod = methodPrototype.constructTestMethod(psiClass, false);
+            PsiMethod psiTestMethod = getPsiMethod(psiClass, testMethod);
+
+            PsiMethod psiMethod = getPsiMethod(psiClass, methodPrototype.constructMethod());
+            if (!psiClassContainsMethod(psiClasses[0],psiMethod)) {
+                addMethodToPsiClass(psiClasses[0], psiMethod);
+            }
+
+            while (psiClassContainsMethodName(psiClass, psiTestMethod.getName())) {
+                if (methodPrototype.getName().matches(".*_[0-9]+$")) {
+                    int suffix = Integer.parseInt(methodPrototype.getName().substring(methodPrototype.getName().lastIndexOf("_")+1))+1;
+                    methodPrototype.setName(methodPrototype.getName().replaceAll("_[0-9]+$","_"+suffix));
+                } else {
+                    methodPrototype.setName(methodPrototype.getName() + "_2");
+                }
+                testMethod = methodPrototype.constructTestMethod(psiClass, true);
+                psiTestMethod = getPsiMethod(psiClass, testMethod);
+            }
+
+            addMethodToPsiClass(psiClass, psiTestMethod);
 
             addImportToPsiClass(psiClass, psiClasses[0]);
             addImportToPsiClass(psiClass,ORG_JUNIT, TEST);
@@ -136,15 +161,9 @@ public class PsiUtils {
     /**
      * Method for adding PsiMethod to PsiClass.
      * @param psiClass  The PsiMethod is added to this PsiClass
-     * @param newMethod String representation of the method. PsiMethod would be created first.
+     * @param method PsiMethod to add to the PsiClass.
      * */
-    private static void addMethodToPsiClass(PsiClass psiClass, String newMethod) throws Exception {
-        PsiElementFactory elementFactory = JavaPsiFacade.getElementFactory(psiClass.getProject());
-        PsiMethod method = elementFactory.createMethodFromText(newMethod, psiClass);
-
-        if (psiClassContainsMethod(psiClass,method))
-            throw new Exception("Class " + psiClass.getName() + " already contains method " + method.getName());
-
+    private static void addMethodToPsiClass(PsiClass psiClass, PsiMethod method) throws Exception {
         new WriteCommandAction.Simple(psiClass.getProject(), psiClass.getContainingFile()) {
             @Override
             protected void run() throws Throwable {
@@ -169,6 +188,12 @@ public class PsiUtils {
         return false;
     }
 
+    private static PsiMethod getPsiMethod(PsiClass psiClass, String newMethod) {
+        PsiElementFactory elementFactory = JavaPsiFacade.getElementFactory(psiClass.getProject());
+        PsiMethod method = elementFactory.createMethodFromText(newMethod, psiClass);
+        return method;
+    }
+
     /**
      * Returns true if methods are equal, or false if not. Methods are equal if they have the same name and same
      * parameters types, including parameters order.
@@ -182,7 +207,8 @@ public class PsiUtils {
             if (a_parameters.length == b_parameters.length) {
                 int count = 0;
                 for (int i = 0; i < a_parameters.length; i++) {
-                    if (a_parameters[i] == b_parameters[i]) {
+                    if (a_parameters[i].getType() == b_parameters[i].getType()) {
+                        System.out.println(a_parameters[i] +" == "+b_parameters[i]);
                         count++;
                     } else return false;
                 }
@@ -193,4 +219,15 @@ public class PsiUtils {
         }
         return false;
     }
+
+    private static boolean psiClassContainsMethodName(PsiClass psiClass, String name) {
+        PsiMethod[] psiClassMethods = psiClass.getMethods();
+        for (PsiMethod pm : psiClassMethods) {
+            if (pm.getName().compareTo(name)==0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

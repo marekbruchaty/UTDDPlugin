@@ -7,7 +7,6 @@
   <description><![CDATA[
       This plugin is used to generate test and production classes, as well as test and production methods from a single action.
       It is primarily intended for use in Test Driven Development, to speed up the implementation of test cases.<br>
-      <em>most HTML tags may be used</em>
     ]]></description>
 
   <change-notes><![CDATA[

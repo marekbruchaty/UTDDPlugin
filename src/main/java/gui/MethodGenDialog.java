@@ -59,7 +59,9 @@ public class MethodGenDialog extends JDialog{
                 try {
                     PsiUtils.writeMethodsToFiles(psiClass,methodPrototype);
                 } catch (Exception ex) {
-                    PopupCreator.createPopup(actionEvent,ex.getMessage(),MessageType.ERROR);
+                    if (!ex.getMessage().isEmpty()) {
+                        PopupCreator.createPopup(actionEvent, ex.getMessage(), MessageType.ERROR);
+                    }
                 }
                 dispose();
             }
@@ -74,7 +76,7 @@ public class MethodGenDialog extends JDialog{
                     methodPrototypeTextField.setForeground(defForegroundColor);
                     methodPrototype = new MethodPrototype(text);
                     methodPreview.setText(methodPrototype.constructMethod());
-                    testMethodPreview.setText(methodPrototype.constructTestMethod(psiClass));
+                    testMethodPreview.setText(methodPrototype.constructTestMethod(psiClass, false));
                     generateButton.setEnabled(true);
                 } catch (Exception exception) {
                     methodPrototypeTextField.setForeground(Color.RED);

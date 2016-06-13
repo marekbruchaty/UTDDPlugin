@@ -150,7 +150,7 @@ public class MethodPrototype {
         return sb.toString();
     }
 
-    public String constructTestMethod(PsiClass psiClass) {
+    public String constructTestMethod(PsiClass psiClass, boolean duplicate) {
         StringBuilder sb = new StringBuilder();
         sb.append("@Test\n");
         sb.append("public void test").append(getName()).append("() throws Exception {\n");
@@ -158,7 +158,7 @@ public class MethodPrototype {
 
         PrimitiveType retType = getReturnType().getType();
         if (retType == PrimitiveType.BOOLEAN) {
-            sb.append(createMethodBody(psiClass, retType, false));
+            sb.append(createMethodBody(psiClass, retType, false, duplicate));
             if (getComparativeSign().equalsIgnoreCase("==")) {
                 if (getReturnType().getValue().equalsIgnoreCase("true")) sb.append("assertTrue(actual);");
                 else sb.append("assertFalse(actual);");
@@ -167,7 +167,7 @@ public class MethodPrototype {
                 else sb.append("assertTrue(actual);");
             }
         } else {
-            sb.append(createMethodBody(psiClass, retType, true));
+            sb.append(createMethodBody(psiClass, retType, true, duplicate));
             if (getComparativeSign().equalsIgnoreCase("==")) sb.append("assertEquals(expected, actual);");
             else sb.append("assertNotEquals(expected, actual);");
         }
@@ -176,7 +176,7 @@ public class MethodPrototype {
         return sb.toString();
     }
 
-    private String createMethodBody(PsiClass psiClass, PrimitiveType retType, boolean addExpectVariable) {
+    private String createMethodBody(PsiClass psiClass, PrimitiveType retType, boolean addExpectVariable, boolean duplicate) {
         String baseClass = psiClass.getName().substring(0, psiClass.getName().length() - "Test".length());
         String baseObject = baseClass.substring(0,1).toLowerCase() + baseClass.substring(1);
 
@@ -189,8 +189,12 @@ public class MethodPrototype {
             sb.append(" expected = ").append(retType == VOID ? "null" : getReturnType().getValue()).append(";\n");
         }
 
+        String prodMethod;
+        if (duplicate) prodMethod = getName().substring(0,getName().lastIndexOf("_"));
+        else prodMethod = getName();
+
         sb.append("\t").append(retType == VOID ? PrimitiveType.OBJECT.getName(): retType.getName());
-        sb.append(" actual = ").append(baseObject).append(".").append(getName()).append("(");
+        sb.append(" actual = ").append(baseObject).append(".").append(prodMethod).append("(");
 
         for (TypeValuePair tvp:getParameters()) sb.append(tvp.getValue()).append(", ");
         if (getParameters().size() != 0) sb.delete(sb.length() - 2,sb.length());
@@ -205,6 +209,10 @@ public class MethodPrototype {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getComparativeSign() {
