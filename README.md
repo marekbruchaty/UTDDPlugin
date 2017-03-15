@@ -1,3 +1,6 @@
-# UTDD Plugin for IntelliJ IDEA
+# Automatized Software Testing
+## UTDD Plugin for IntelliJ IDEA
 
 This project is created as a part of my bachelor thesis. It provides a set of tools to simplify the creation of test classes and test methods.
+
+**Abstrakt:**	*With the evolution of the agile software development, software testing methods necessary for a sustainable progression of this methodology, have also advanced. Unit testing has become the cornerstone of the agile software development and still represents the basis for many other testing techniques. The strongest impact of unit testing can be observed with concepts like test driven development, for which these tests are a necessity. Software projects based on the concepts of test driven development are the ideal candidates for software automation, due to the large number of tests they are implementing. Although code repetition is inevitable, due to the structural differences in many software projects, unification of the test tools is not possible. We propose a method for an optimization of the use of unit testing tools, suitable for the use in test driven development, with the main focus on tools, dedicated for automatized unit testing. The proposed configuration of testing tools is enhanced by a custom implementation, that addresses the missing requirements, unable to satisfy by currently available testing tools. The proposed method allows us to achieve a high level of atomization for the implementation and execution of tests in test driven development.*
